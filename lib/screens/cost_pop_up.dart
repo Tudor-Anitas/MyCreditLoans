@@ -60,14 +60,17 @@ class _CostPopUpState extends State<CostPopUp> {
               ),
               child: Column(
                 children: [
+                  //--------------------------------- space
                   Expanded(
                     flex: 10,
                     child: Container(),
                   ),
+                  //--------------------------------- first heading
                   Expanded(
                       flex: 10,
                       child: Text('The applied interest is 1%', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),)
                   ),
+                  //--------------------------------- second heading
                   Expanded(
                       flex: 10,
                       child: Column(
@@ -81,11 +84,13 @@ class _CostPopUpState extends State<CostPopUp> {
                     flex: 10,
                     child: Container(),
                   ),
+                  //--------------------------------- cancel and accept buttons
                   Expanded(
                     flex: 10,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        //--------------------------------- cancel button
                         Container(
                           width: widget.width * 0.4,
                           height: widget.height * 0.15,
@@ -94,6 +99,7 @@ class _CostPopUpState extends State<CostPopUp> {
                               child: Text('Cancel', style: GoogleFonts.montserrat(fontSize: 24, color: kRedPigment, fontWeight: FontWeight.w400),)
                           ),
                         ),
+                        //--------------------------------- accept button
                         Container(
                           width: widget.width * 0.4,
                           height: widget.height * 0.13,

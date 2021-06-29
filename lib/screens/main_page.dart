@@ -60,8 +60,6 @@ class _MainPageState extends State<MainPage> {
     double windowHeight = MediaQuery.of(context).size.height;
 
     // sizes for the panels
-
-
     _popupHeight = windowHeight * 0.5;
     _popupWidth = windowWidth * 0.9;
 
@@ -354,6 +352,7 @@ class _MainPageState extends State<MainPage> {
                     children: [
                       Container(
                         width: windowWidth * 0.6,
+                        //--------------------------------- headers
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -387,12 +386,6 @@ class _MainPageState extends State<MainPage> {
                 height: _detailsHeight,
                 yPosition: _detailsY,
                 controllers: detailsControllers,
-                continueAction: (){
-                  setState(() {
-                    //_pageState = 1;
-
-                  });
-                },
               ),
             ),
           ],

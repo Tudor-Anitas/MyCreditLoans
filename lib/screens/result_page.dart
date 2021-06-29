@@ -25,6 +25,7 @@ class _ResultPageState extends State<ResultPage> {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
 
+    /// overrides the back press to go to the main screen instead
     return WillPopScope(
       onWillPop: () async{
          Navigator.pushReplacement(
@@ -49,13 +50,19 @@ class _ResultPageState extends State<ResultPage> {
             child: Column(
               children: [
                 SizedBox(height: windowHeight * 0.15,),
+                ///--------------------------------- heading
                 Text('Your application was', style: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),),
+                ///--------------------------------- status of the application
                 widget.score >= 7 ? Text('successful!', style: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),) :
                                     Text('unsuccessful!', style: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),),
+                ///--------------------------------- icon depending on the status of the application
                 widget.score >= 7 ? Icon(Icons.cake, color: kSeaShell, size: 42) : Icon(Icons.mood_bad, color: kSeaShell, size: 42),
+                ///--------------------------------- heading
                 Text('Your credit score is', style: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),),
+                ///--------------------------------- score heading
                 Text('${widget.score}', style: GoogleFonts.montserrat(fontSize: 64, color: kSeaShell, fontWeight: FontWeight.w500),),
                 SizedBox(height: windowHeight * 0.1,),
+                ///--------------------------------- finish button
                 Container(
                   width: windowWidth * 0.35,
                   height: windowHeight * 0.06,

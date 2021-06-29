@@ -15,7 +15,6 @@ class DetailsPage extends StatefulWidget {
   late double width;
   late double height;
   late double yPosition;
-  late var continueAction;
   late List controllers;
 
 
@@ -23,7 +22,6 @@ class DetailsPage extends StatefulWidget {
     required this.width,
     required this.height,
     required this.yPosition,
-    required this.continueAction,
     required this.controllers,
   });
 
@@ -33,12 +31,15 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
 
-  PickedFile? _galleryImage;
+  PickedFile? _galleryImage; // the image picked from the gallery
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   SnackBar _invalidInputSnackBar = SnackBar(content: Text('Please fill all the fields!'));
   @override
   Widget build(BuildContext context) {
+
+    //////////////////////////////////////////////////// METHODS
+    ////////////////////////////////////////////////////
 
     /// Method to get a image from the gallery
     pickImage() async {
@@ -81,6 +82,9 @@ class _DetailsPageState extends State<DetailsPage> {
     }
 
 
+    ////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////
+
     return GestureDetector(
       onTap: (){
         // makes sure the keyboard is unfocused when it's not used
@@ -108,12 +112,14 @@ class _DetailsPageState extends State<DetailsPage> {
                   borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
                   color: kSeaShell
               ),
+              //--------------------------------- start of the form
               child: Form(
                 key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(height: widget.height * 0.03,),
+                    //--------------------------------- heading
                     Column(
                       children: [
                         Text('Please complete the', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),),
@@ -121,6 +127,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ],
                     ),
                     SizedBox(height: widget.height * 0.03,),
+                    //--------------------------------- Last and First name
                     Input(
                       width: widget.width * 0.8,
                       height: widget.height * 0.065,
@@ -133,6 +140,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       },
                     ),
                     SizedBox(height: widget.height * 0.02,),
+                    //--------------------------------- Occupation status
                     Input(
                       width: widget.width * 0.8,
                       height: widget.height * 0.065,
@@ -145,6 +153,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       },
                     ),
                     SizedBox(height: widget.height * 0.02,),
+                    //--------------------------------- Job title
                     Input(
                       width: widget.width * 0.8,
                       height: widget.height * 0.065,
@@ -167,6 +176,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                //--------------------------------- Monthly income
                                 Input(
                                   width: widget.width * 0.45,
                                   height: widget.height * 0.065,
@@ -181,6 +191,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               ],
                             ),
                           ),
+                          //--------------------------------- Image picker
                           GestureDetector(
                             onTap: pickImage,
                             child: Container(
@@ -191,6 +202,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   color: Color(0xffebebeb)
                               ),
                               child: Icon(
+                                // if the image is picked successfully, the icon will change to a check sign
                                  _galleryImage == null? Icons.camera_alt : Icons.done,
                                 size: 50.0,
                               ),
@@ -200,6 +212,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                     SizedBox(height: widget.height * 0.05,),
+                    ///--------------------------------- Continue button
                     Container(
                       width: widget.width * 0.7,
                       decoration: BoxDecoration(

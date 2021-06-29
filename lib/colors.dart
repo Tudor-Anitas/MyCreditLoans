@@ -10,5 +10,3 @@ Color kRedPigment = Color(0xffFD0122);
 Color kSeaShell = Color(0xffFFF5EB);
 Color kGrey = Color(0xff696969);
 Color kBlue = Color(0xffebebeb);
-
-
