@@ -269,6 +269,9 @@ class _MainPageState extends State<MainPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         color: kGreenCyan,
+                        boxShadow: [
+                          BoxShadow(offset: Offset(0.0, 4.0), blurRadius: 5.0, spreadRadius: 0, color: Colors.grey)
+                        ]
                       ),
                       child: MaterialButton(
                         minWidth: windowWidth * 0.65,
@@ -386,12 +389,12 @@ class _MainPageState extends State<MainPage> {
                 controllers: detailsControllers,
                 continueAction: (){
                   setState(() {
-                    _pageState = 1;
+                    //_pageState = 1;
+
                   });
                 },
               ),
             ),
-
           ],
         ),
       ),

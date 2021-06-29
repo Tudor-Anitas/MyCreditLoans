@@ -99,7 +99,10 @@ class _CostPopUpState extends State<CostPopUp> {
                           height: widget.height * 0.13,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                              color: kGreenCyan
+                              color: kGreenCyan,
+                              boxShadow: [
+                                BoxShadow(offset: Offset(0.0, 4.0), blurRadius: 5.0, spreadRadius: 0, color: Colors.grey)
+                              ]
                           ),
                           child: MaterialButton(
                               onPressed: widget.acceptAction,

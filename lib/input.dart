@@ -12,6 +12,7 @@ class Input extends StatefulWidget {
   late TextEditingController controller;
   late TextInputType inputType;
   late String hint;
+  late var validator;
 
 
   Input({
@@ -19,7 +20,8 @@ class Input extends StatefulWidget {
     required this.height,
     required this.controller,
     required this.hint,
-    this.inputType = TextInputType.text
+    this.inputType = TextInputType.text,
+    required this.validator,
   });
 
   @override
@@ -36,13 +38,14 @@ class _InputState extends State<Input> {
         borderRadius: BorderRadius.all(Radius.circular(8)),
         color: Color(0xffebebeb)
       ),
-      child: TextField(
+      child: TextFormField(
         controller: widget.controller,
         style: GoogleFonts.montserrat(fontSize: 16),
         keyboardType: widget.inputType,
+        validator: widget.validator,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
           border: InputBorder.none,
           hintText: widget.hint,
         ),
