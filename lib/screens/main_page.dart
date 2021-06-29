@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_credit_loans/colors.dart';
 import 'package:my_credit_loans/screens/cost_pop_up.dart';
+import 'package:my_credit_loans/screens/details_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -19,16 +21,33 @@ class _MainPageState extends State<MainPage> {
   double _panelHeight = 0;
   double _panelWidth = 0;
   double _panelY = 0;
+  double _panelX = 0;
+  double _panelOpacity = 1.0;
 
   //controls for the cost pop up
   double _popupHeight = 0;
   double _popupWidth = 0;
   double _popupY = 0;
+  double _popupX = 0;
+
+  // controls for the details form
+  double _detailsHeight = 0;
+  double _detailsWidth = 0;
+  double _detailsY = 0;
+  double _paymentDetailsY = 0;
 
 
   double _currentLoanValue = 100; // the value of the loan
   List<String> timePeriods = ['1 month', '3 months', '6 months', '1 year']; // the time periods of the loan
   String? _shownPeriodOfTime = '1 month'; // what period of time is selected
+
+  // the text fields for the detail page
+  List<TextEditingController> detailsControllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController()
+  ];
 
   double monthlyPayment = 0; // the amount of money the user must pay monthly
 
@@ -40,28 +59,85 @@ class _MainPageState extends State<MainPage> {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
 
+    // sizes for the panels
+
+
+    _popupHeight = windowHeight * 0.5;
+    _popupWidth = windowWidth * 0.9;
+
+    _detailsHeight = windowHeight;
+    _detailsWidth = windowWidth * 0.9;
+
+    // control the state of the application
     switch(_pageState){
       case 0:
         // show the loan form
         _panelY = windowHeight * 0.35;
+        _panelX = windowWidth * 0.05;
+        _panelWidth = windowWidth * 0.9;
+        _panelOpacity = 1.0;
+
         _panelHeight = windowHeight * 0.65;
         _panelWidth = windowWidth * 0.9;
 
         // hide the cost pop up
         _popupY = -windowHeight * 1.0;
+        _popupX = 0;
+
+        // hide the details page
+        _detailsY = windowHeight;
+        _paymentDetailsY = -windowHeight * 0.5;
         break;
+
       case 1:
         // hide the loan form
         _panelY = windowHeight;
 
+        // hide the details page
+        _detailsY = windowHeight;
+        _paymentDetailsY = -windowWidth * 0.5;
+
         // show the cost pop up
         _popupHeight = windowHeight * 0.5;
-        _popupWidth = windowWidth * 0.9;
         _popupY = windowHeight * 0.0;
+        _popupX = 0;
+        break;
+
+      case 2:
+        // hide the cost pop up
+        //_popupY = -windowHeight * 1.0;
+        _popupX = -windowWidth * 1;
+
+        // set the panel according to the state of the keyboard, if it is open or closed
+        _panelY = MediaQuery.of(context).viewInsets.bottom != 0.0 ?
+                     windowHeight * 0.1 : windowWidth * 0.62;
+
+        _panelX = windowWidth * 0.1;
+        _panelWidth = windowWidth * 0.8;
+        _panelOpacity = 0.7;
+
+        // set the panel according to the state of the keyboard, if it is open or closed
+        _paymentDetailsY = MediaQuery.of(context).viewInsets.bottom != 0.0 ?
+                            -windowHeight * 0.3 : windowHeight * 0.05;
+
+
+        // bring the details form in front
+        // after a small delay for a better transition
+        if(MediaQuery.of(context).viewInsets.bottom != 0.0)
+          _detailsY = -windowHeight * 0.2;
+        else
+          Timer(Duration(milliseconds: 75), (){
+            setState(() {
+              _detailsY = windowHeight * 0;
+            });
+          });
+
+
         break;
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: kXiketic,
       body: Container(
         height: windowHeight,
@@ -82,12 +158,12 @@ class _MainPageState extends State<MainPage> {
             AnimatedContainer(
               duration: Duration(milliseconds: 500),
               curve: Curves.fastOutSlowIn,
-              transform: Matrix4.translationValues(0, _panelY, 1),
+              transform: Matrix4.translationValues(_panelX, _panelY, 1),
               width: _panelWidth,
               height: _panelHeight ,
-              margin: EdgeInsets.only(left: windowHeight * 0.025),
+              //margin: EdgeInsets.only(left: windowWidth * 0.05),
               decoration: BoxDecoration(
-                color: kSeaShell,
+                color: kSeaShell.withOpacity(_panelOpacity),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
               ),
               child: Column(
@@ -203,6 +279,7 @@ class _MainPageState extends State<MainPage> {
                             // we add 1% to the current value chosen to loan
                             double finalLoanValue = _currentLoanValue + (_currentLoanValue / 100);
 
+                            // calculate the monthly payment
                             switch(_shownPeriodOfTime){
                               case '1 month':
                                 monthlyPayment = finalLoanValue;
@@ -221,7 +298,7 @@ class _MainPageState extends State<MainPage> {
                                 break;
                             }
 
-
+                            // show the cost pop up with the updated data
                             _pageState = 1;
 
                           });
@@ -240,6 +317,7 @@ class _MainPageState extends State<MainPage> {
                 width: _popupWidth,
                 height: _popupHeight,
                 yPosition: _popupY,
+                xPosition: _popupX,
                 monthlyPayment: monthlyPayment,
                 cancelAction: (){
                   setState(() {
@@ -249,11 +327,71 @@ class _MainPageState extends State<MainPage> {
                 },
                 acceptAction: (){
                   setState(() {
-
+                    _pageState = 2;
                   });
                 },
               ),
-            )
+            ),
+            //--------------------------------- Details about payment
+            Padding(
+              padding: EdgeInsets.only(left: windowWidth * 0.1),
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                curve: Curves.fastOutSlowIn,
+                transform: Matrix4.translationValues(0, _paymentDetailsY, 1),
+                width: windowWidth * 0.8,
+                height: windowHeight * 0.22,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: kGreenCyan
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(windowHeight * 0.025),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: windowWidth * 0.6,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                width: windowWidth * 0.6,
+                                child: Text('Payment per month', style: GoogleFonts.montserrat(fontSize: 22, color: kSeaShell, fontWeight: FontWeight.w500),)),
+                            Container(
+                                width: windowWidth * 0.6,
+                                child: Text('${monthlyPayment.round()} ron', style: GoogleFonts.montserrat(fontSize: 22, color: kXiketic, fontWeight: FontWeight.w500))
+                            ),
+                            Container(
+                                width: windowWidth * 0.6,
+                                child: Text('Period of time', style: GoogleFonts.montserrat(fontSize: 22, color: kSeaShell, fontWeight: FontWeight.w500),)),
+                            Container(
+                                width: windowWidth * 0.6,
+                                child: Text('$_shownPeriodOfTime', style: GoogleFonts.montserrat(fontSize: 22, color: kXiketic, fontWeight: FontWeight.w500),))
+                          ],
+                        ),
+                      ),
+                      Container()
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            //--------------------------------- Details page
+            Padding(
+              padding: EdgeInsets.only(left: windowWidth * 0.05),
+              child: DetailsPage(
+                width: _detailsWidth,
+                height: _detailsHeight,
+                yPosition: _detailsY,
+                controllers: detailsControllers,
+                continueAction: (){
+                  setState(() {
+                    _pageState = 1;
+                  });
+                },
+              ),
+            ),
+
           ],
         ),
       ),

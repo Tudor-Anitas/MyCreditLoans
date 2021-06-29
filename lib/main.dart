@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page.dart';
-import 'package:my_credit_loans/screens/test.dart';
 
 void main() {
   runApp(MyApp());
