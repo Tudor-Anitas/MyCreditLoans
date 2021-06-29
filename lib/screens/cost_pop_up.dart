@@ -8,6 +8,7 @@ class CostPopUp extends StatefulWidget {
   late double yPosition;
   late double width;
   late double height;
+  late double monthlyPayment;
   late var cancelAction;
   late var acceptAction;
 
@@ -16,7 +17,8 @@ class CostPopUp extends StatefulWidget {
     required this.width,
     required this.height,
     required this.cancelAction,
-    required this.acceptAction
+    required this.acceptAction,
+    required this.monthlyPayment,
   });
 
   @override
@@ -29,61 +31,77 @@ class _CostPopUpState extends State<CostPopUp> {
     return AnimatedContainer(
       duration: Duration(milliseconds: 500),
       curve: Curves.fastOutSlowIn,
-      transform: Matrix4.translationValues(0, widget.yPosition, 2),
+      transform: Matrix4.translationValues(0, widget.yPosition, 1),
       width: widget.width,
-      height: widget.height,
-      decoration: BoxDecoration(
-        color: kSeaShell,
-        borderRadius: BorderRadius.all(Radius.circular(20))
-      ),
+      height: widget.height * 1.5,
       child: Column(
         children: [
-          Expanded(
-            flex: 10,
-            child: Container(),
+          Opacity(
+            opacity: 0.0,
+            child: Container(
+              height: widget.height * 0.5,
+              width: widget.width,
+              color: Colors.white,
+            ),
           ),
-          Expanded(
-              flex: 10,
-              child: Text('The applied interest is 1%', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),)
-          ),
-          Expanded(
-              flex: 10,
-              child: Column(
-                children: [
-                  Text('The payment for every', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),),
-                  Text('month will be x', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),),
-                ],
-              )
-          ),
-          Expanded(
-            flex: 10,
-            child: Container(),
-          ),
-          Expanded(
-            flex: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Container(
+            width: widget.width,
+            height: widget.height,
+            decoration: BoxDecoration(
+                color: kSeaShell,
+                borderRadius: BorderRadius.all(Radius.circular(20))
+            ),
+            child: Column(
               children: [
-                Container(
-                  width: widget.width * 0.4,
-                  height: widget.height * 0.15,
-                  child: MaterialButton(
-                      onPressed: widget.cancelAction,
-                      child: Text('Cancel', style: GoogleFonts.montserrat(fontSize: 24, color: kRedPigment, fontWeight: FontWeight.w400),)
-                  ),
+                Expanded(
+                  flex: 10,
+                  child: Container(),
                 ),
-                Container(
-                  width: widget.width * 0.4,
-                  height: widget.height * 0.13,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    color: kGreenCyan
-                  ),
-                  child: MaterialButton(
-                      onPressed: widget.acceptAction,
-                      child: Text('Accept', style: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),)
-                  ),
+                Expanded(
+                    flex: 10,
+                    child: Text('The applied interest is 1%', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),)
                 ),
+                Expanded(
+                    flex: 10,
+                    child: Column(
+                      children: [
+                        Text('The payment for every', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),),
+                        Text('month will be ${widget.monthlyPayment.round()} ron', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),),
+                      ],
+                    )
+                ),
+                Expanded(
+                  flex: 10,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: widget.width * 0.4,
+                        height: widget.height * 0.15,
+                        child: MaterialButton(
+                            onPressed: widget.cancelAction,
+                            child: Text('Cancel', style: GoogleFonts.montserrat(fontSize: 24, color: kRedPigment, fontWeight: FontWeight.w400),)
+                        ),
+                      ),
+                      Container(
+                        width: widget.width * 0.4,
+                        height: widget.height * 0.13,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            color: kGreenCyan
+                        ),
+                        child: MaterialButton(
+                            onPressed: widget.acceptAction,
+                            child: Text('Accept', style: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),)
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           )

@@ -26,11 +26,13 @@ class _MainPageState extends State<MainPage> {
   double _popupY = 0;
 
 
-  double _currentLoanValue = 100;
-  List<String> timePeriods = ['1 month', '3 months', '6 months', '1 year'];
-  String? _shownPeriodOfTime = '1 month';
+  double _currentLoanValue = 100; // the value of the loan
+  List<String> timePeriods = ['1 month', '3 months', '6 months', '1 year']; // the time periods of the loan
+  String? _shownPeriodOfTime = '1 month'; // what period of time is selected
 
-  int _pageState = 0;
+  double monthlyPayment = 0; // the amount of money the user must pay monthly
+
+  int _pageState = 0; // defines the state of the page
   @override
   Widget build(BuildContext context) {
 
@@ -46,14 +48,16 @@ class _MainPageState extends State<MainPage> {
         _panelWidth = windowWidth * 0.9;
 
         // hide the cost pop up
-        _popupY = -windowHeight * 0.5;
+        _popupY = -windowHeight * 1.0;
         break;
       case 1:
         // hide the loan form
         _panelY = windowHeight;
 
         // show the cost pop up
-        _popupY = windowHeight * 0.25;
+        _popupHeight = windowHeight * 0.5;
+        _popupWidth = windowWidth * 0.9;
+        _popupY = windowHeight * 0.0;
         break;
     }
 
@@ -86,146 +90,166 @@ class _MainPageState extends State<MainPage> {
                 color: kSeaShell,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
               ),
-              child: GestureDetector(
-                onTap: ()=>print('column'),
-                child: Column(
-                  children: [
-                    Expanded(flex: 10, child: Container(),),
-                    //--------------------------------- Headline
-                    Expanded(
-                      flex: 20,
+              child: Column(
+                children: [
+                  Expanded(flex: 10, child: Container(),),
+                  //--------------------------------- Headline
+                  Expanded(
+                    flex: 20,
+                    child: Column(
+                      children: [
+                        Text('Please select the', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),),
+                        Text('desired sum', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500))
+                      ],
+                    ),
+                  ),
+                  //--------------------------------- Amount of load slider
+                  Expanded(
+                    flex: 20,
+                    child: Container(
+                      width: windowWidth * 0.75,
                       child: Column(
                         children: [
-                          Text('Please select the', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),),
-                          Text('desired sum', style: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500))
-                        ],
-                      ),
-                    ),
-                    //--------------------------------- Amount of load slider
-                    Expanded(
-                      flex: 20,
-                      child: Container(
-                        width: windowWidth * 0.75,
-                        child: Column(
-                          children: [
-                            Slider(
-                              value: _currentLoanValue,
-                              min: 100,
-                              max: 1000,
-                              divisions: 18,
-                              label: _currentLoanValue.toString(),
-                              onChanged: (double value) {
-                                setState(() {
-                                  print(value);
-                                  _currentLoanValue = value;
-                                });
-                              },
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('100', style: GoogleFonts.montserrat(fontSize: 20, color: kGrey, fontWeight: FontWeight.w500)),
-                                Text('1000', style: GoogleFonts.montserrat(fontSize: 20, color: kGrey, fontWeight: FontWeight.w500))
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(flex: 10, child: Container(),),
-                    //--------------------------------- The period of time for loan
-                    Expanded(
-                      flex: 20,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          //--------------------------------- headings
-                          Container(
-                            width: windowWidth * 0.4,
-                            height: windowHeight,
-                            child: Column(
-                              children: [
-                                Text('The period', style: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.w500)),
-                                Text('of time for', style: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.w500)),
-                                Text('the loan', style: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.w500),)
-                              ],
-                            ),
+                          Slider(
+                            value: _currentLoanValue,
+                            min: 100,
+                            max: 1000,
+                            divisions: 18,
+                            label: _currentLoanValue.toString(),
+                            onChanged: (double value) {
+                              setState(() {
+                                _currentLoanValue = value;
+                              });
+                            },
                           ),
-                          //--------------------------------- dropdown
-                          Container(
-                            width: windowWidth * 0.3,
-                            height: windowHeight,
-                            margin: EdgeInsets.only(right: windowWidth * 0.05),
-                            child: Column(
-                              children: [
-                                DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    value: _shownPeriodOfTime,
-                                    style: GoogleFonts.montserrat(fontSize: 18, color: kXiketic),
-                                    items: timePeriods.map((period){
-                                      return DropdownMenuItem(
-                                        child: Text(period),
-                                        value: period
-                                      );
-                                    }).toList(),
-                                    onChanged: (period){
-                                      setState(() {
-                                        print(period);
-                                        _shownPeriodOfTime = period;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('100', style: GoogleFonts.montserrat(fontSize: 20, color: kGrey, fontWeight: FontWeight.w500)),
+                              Text('1000', style: GoogleFonts.montserrat(fontSize: 20, color: kGrey, fontWeight: FontWeight.w500))
+                            ],
                           )
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: 28,
-                      child: Container(),
-                    ),
-                    //--------------------------------- Continue button
-                    Expanded(
-                      flex: 12,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: kGreenCyan,
-                        ),
-                        child: MaterialButton(
-                          minWidth: windowWidth * 0.65,
+                  ),
+                  Expanded(flex: 10, child: Container(),),
+                  //--------------------------------- The period of time for loan
+                  Expanded(
+                    flex: 20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //--------------------------------- headings
+                        Container(
+                          width: windowWidth * 0.4,
                           height: windowHeight,
-                          child: Text('Continue', style: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),),
-                          onPressed: (){
-                            setState(() {
-                              _pageState = 1;
-                            });
-                          },
+                          child: Column(
+                            children: [
+                              Text('The period', style: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.w500)),
+                              Text('of time for', style: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.w500)),
+                              Text('the loan', style: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.w500),)
+                            ],
+                          ),
                         ),
+                        //--------------------------------- dropdown
+                        Container(
+                          width: windowWidth * 0.3,
+                          height: windowHeight,
+                          margin: EdgeInsets.only(right: windowWidth * 0.05),
+                          child: Column(
+                            children: [
+                              DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  value: _shownPeriodOfTime,
+                                  style: GoogleFonts.montserrat(fontSize: 18, color: kXiketic),
+                                  items: timePeriods.map((period){
+                                    return DropdownMenuItem(
+                                      child: Text(period),
+                                      value: period
+                                    );
+                                  }).toList(),
+                                  onChanged: (period){
+                                    setState(() {
+                                      _shownPeriodOfTime = period;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 28,
+                    child: Container(),
+                  ),
+                  //--------------------------------- Continue button
+                  Expanded(
+                    flex: 12,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: kGreenCyan,
+                      ),
+                      child: MaterialButton(
+                        minWidth: windowWidth * 0.65,
+                        height: windowHeight,
+                        child: Text('Continue', style: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),),
+                        onPressed: (){
+                          setState(() {
+                            // we add 1% to the current value chosen to loan
+                            double finalLoanValue = _currentLoanValue + (_currentLoanValue / 100);
+
+                            switch(_shownPeriodOfTime){
+                              case '1 month':
+                                monthlyPayment = finalLoanValue;
+                                break;
+                              case '3 months':
+                                monthlyPayment = finalLoanValue/3;
+                                monthlyPayment.round();
+                                break;
+                              case '6 months':
+                                monthlyPayment = finalLoanValue/6;
+                                monthlyPayment.round();
+                                break;
+                              case '1 year':
+                                monthlyPayment = finalLoanValue/12;
+                                monthlyPayment.round();
+                                break;
+                            }
+
+
+                            _pageState = 1;
+
+                          });
+                        },
                       ),
                     ),
-                    Expanded(flex: 5, child: Container(),)
-                  ],
-                ),
+                  ),
+                  Expanded(flex: 5, child: Container(),)
+                ],
               )
             ),
             //--------------------------------- Cost pop up
             Padding(
               padding: EdgeInsets.only(left: windowWidth * 0.05),
               child: CostPopUp(
-                width: windowWidth * 0.9,
-                height: windowHeight * 0.5,
+                width: _popupWidth,
+                height: _popupHeight,
                 yPosition: _popupY,
+                monthlyPayment: monthlyPayment,
                 cancelAction: (){
                   setState(() {
                     _pageState = 0;
+                    monthlyPayment = 0;
                   });
                 },
                 acceptAction: (){
                   setState(() {
-                    _pageState = 0;
+
                   });
                 },
               ),
