@@ -108,7 +108,7 @@ class _MainPageState extends State<MainPage> {
 
         // set the panel according to the state of the keyboard, if it is open or closed
         _panelY = MediaQuery.of(context).viewInsets.bottom != 0.0 ?
-                     windowHeight * 0.1 : windowWidth * 0.62;
+                     windowHeight * 0.1 : windowWidth * 0.637;
 
         _panelX = windowWidth * 0.1;
         _panelWidth = windowWidth * 0.8;
