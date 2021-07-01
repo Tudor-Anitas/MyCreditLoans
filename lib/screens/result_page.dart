@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_credit_loans/colors.dart';
-import 'package:my_credit_loans/screens/main_page.dart';
+import 'package:my_credit_loans/screens/main_page/main_page.dart';
 
 class ResultPage extends StatefulWidget {
 

@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_credit_loans/colors.dart';
-import 'package:my_credit_loans/input.dart';
+import 'package:my_credit_loans/widgets/input.dart';
 import 'package:my_credit_loans/screens/result_page.dart';
 import 'package:http/http.dart' as http;
 
