@@ -14,7 +14,7 @@ class Headline extends StatelessWidget {
         Container(
             height: height,
             child: Center(
-                child: Text('Welcome!', style: Theme.of(context).textTheme.headline1)
+                child: Text('Welcome!', style: Theme.of(context).textTheme.headline2)
             )
         ),
       ],

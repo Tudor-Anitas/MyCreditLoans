@@ -14,7 +14,7 @@ class Input extends StatefulWidget {
 
   late var validator;
 
-
+  /// Creates a text input to be displayed
   Input({
     required this.width,
     required this.height,
@@ -46,7 +46,7 @@ class _InputState extends State<Input> {
         validator: widget.validator,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           border: InputBorder.none,
           hintText: widget.hint,
         ),

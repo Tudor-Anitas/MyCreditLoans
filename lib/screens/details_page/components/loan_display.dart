@@ -7,7 +7,8 @@ class LoanDisplay extends StatelessWidget {
   late double loanValue;
   late int timePeriod;
 
-
+  /// Displays the amount of money the user will pay every month, represented by
+  /// [loanValue] for the selected period of time, [timePeriod]
   LoanDisplay({
     required this.width,
     required this.height,
@@ -23,7 +24,7 @@ class LoanDisplay extends StatelessWidget {
       padding: EdgeInsets.only(top: height * 0.1, left: width * 0.05),
       decoration: BoxDecoration(
         color: Theme.of(context).accentColor,
-        borderRadius: BorderRadius.all(Radius.circular(20))
+        borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(
         children: [

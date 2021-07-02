@@ -7,6 +7,8 @@ class DetailsPage extends StatefulWidget {
   late double loanValue;
   late int timePeriod;
 
+  /// The page will display the selected loan plan and will provide a form
+  /// to get some information about the user to calculate its score
   DetailsPage({
     required this.loanValue,
     required this.timePeriod

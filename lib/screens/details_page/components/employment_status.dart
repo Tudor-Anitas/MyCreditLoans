@@ -7,6 +7,8 @@ class EmploymentStatus extends StatefulWidget {
   late double width;
   late double height;
 
+  /// Displays a row with two toggle buttons that keep the state of the
+  /// employment of the user
   EmploymentStatus({
     required this.width,
     required this.height
@@ -28,7 +30,7 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
                 DetailsForm.isEmployed = true;
               });
             },
-            child: SwitchButton(width: widget.width * 0.35, height: widget.height * 0.065, title: 'Employed', isActive: DetailsForm.isEmployed,)
+            child: SwitchButton(width: widget.width * 0.35, height: widget.height * 0.08, title: 'Employed', isActive: DetailsForm.isEmployed,)
         ),
         SizedBox(width: widget.width * 0.05,),
         GestureDetector(
@@ -37,7 +39,7 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
                 DetailsForm.isEmployed = false;
               });
             },
-            child: SwitchButton(width: widget.width * 0.35, height: widget.height * 0.065, title: 'Unemployed', isActive: !DetailsForm.isEmployed,)
+            child: SwitchButton(width: widget.width * 0.35, height: widget.height * 0.08, title: 'Unemployed', isActive: !DetailsForm.isEmployed,)
         )
       ],
     );

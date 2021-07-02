@@ -12,15 +12,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // takes the size of the screen
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.customTheme,
       home: AnimatedSplashScreen(
-        splash: Column(
-          children: [
-            Text('My credit'),
-            Text('loans')
-          ],
+        splash: FlutterLogo(
+          size: 100.0,
         ),
         nextScreen: MainPage(),
         splashTransition: SplashTransition.fadeTransition,
