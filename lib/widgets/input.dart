@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../colors.dart';
-
 class Input extends StatefulWidget {
 
   late double width;
   late double height;
   late TextEditingController controller;
-  late TextInputType inputType;
+  TextInputType inputType;
+  double hintSize;
   late String hint;
+
   late var validator;
 
 
@@ -21,6 +21,7 @@ class Input extends StatefulWidget {
     required this.controller,
     required this.hint,
     this.inputType = TextInputType.text,
+    this.hintSize = 16,
     required this.validator,
   });
 
@@ -40,12 +41,12 @@ class _InputState extends State<Input> {
       ),
       child: TextFormField(
         controller: widget.controller,
-        style: GoogleFonts.montserrat(fontSize: 16),
+        style: GoogleFonts.montserrat(fontSize: widget.hintSize),
         keyboardType: widget.inputType,
         validator: widget.validator,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
           border: InputBorder.none,
           hintText: widget.hint,
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/main_page/main_page.dart';
 
 class ValidateButton extends StatelessWidget {
 

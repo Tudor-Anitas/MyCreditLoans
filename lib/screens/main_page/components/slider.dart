@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page/main_page.dart';
 
-import 'loan_form.dart';
-
 class LoanSlider extends StatefulWidget {
 
   late double width;

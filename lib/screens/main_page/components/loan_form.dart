@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page/components/dialog_popup.dart';
 import 'package:my_credit_loans/screens/main_page/components/loan_period.dart';
 import 'package:my_credit_loans/screens/main_page/components/slider.dart';
-import 'package:my_credit_loans/widgets/cancel_button.dart';
 import 'package:my_credit_loans/widgets/validate_button.dart';
 
 class LoanForm extends StatefulWidget {
@@ -47,7 +46,7 @@ class _LoanFormState extends State<LoanForm> {
             width: widget.width * 0.75,
             height: widget.height * 0.08,
             onPressed: (){
-              showCostDialog(context, widget.width * 0.3, widget.height * 0.07);
+              showCostDialog(context, widget.width, widget.height);
               },
           )
         ],
