@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_credit_loans/methods.dart';
 import 'package:my_credit_loans/screens/main_page/components/headline.dart';
 import 'package:my_credit_loans/screens/main_page/components/loan_form.dart';
 
@@ -28,6 +29,13 @@ class _MainPageState extends State<MainPage> {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
 
+    print(windowHeight);
+    print(windowWidth);
+
+    // describes the size of the screen to better build the UI
+    // can be: 'small', 'normal', or 'large'
+    String screenSizeFlag = getScreenSizeType(windowHeight);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -38,7 +46,7 @@ class _MainPageState extends State<MainPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Headline(height: windowHeight * 0.34,),
-              LoanForm(width: windowWidth, height: windowHeight * 0.66)
+              LoanForm(width: windowWidth, height: windowHeight * 0.66, screenType: screenSizeFlag,)
             ],
           ),
         ),

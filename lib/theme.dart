@@ -15,13 +15,13 @@ class CustomTheme{
       scaffoldBackgroundColor: kXiketic,
       textTheme: TextTheme(
         headline1: GoogleFonts.montserrat(fontSize: 80, color: kSeaShell, fontWeight: FontWeight.w500),
-        headline2: GoogleFonts.lobster(fontSize: 64, color: kSeaShell, fontWeight: FontWeight.w500),
-        headline3: GoogleFonts.montserrat(fontSize: 36, color: kSeaShell, fontWeight: FontWeight.w500),
+        headline2: GoogleFonts.lobster(fontSize: 60, color: kSeaShell, fontWeight: FontWeight.w500),
+        headline3: GoogleFonts.montserrat(fontSize: 48, color: kSeaShell, fontWeight: FontWeight.w500),
         headline6: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),
-        bodyText1: GoogleFonts.montserrat(fontSize: 24, color: kXiketic, fontWeight: FontWeight.w500),
-        bodyText2: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.w400),
-        caption: GoogleFonts.montserrat(fontSize: 14, color: kGrey),
-        button: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500)
+        bodyText1: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.normal),
+        bodyText2: GoogleFonts.montserrat(fontSize: 18, color: kXiketic, fontWeight: FontWeight.normal),
+        caption: GoogleFonts.montserrat(fontSize: 12, color: kGrey),
+        button: GoogleFonts.montserrat(fontSize: 20, color: kSeaShell, fontWeight: FontWeight.w500)
       )
     );
   }

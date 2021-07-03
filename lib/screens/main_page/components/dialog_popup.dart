@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 
 
 
-showCostDialog(BuildContext context, double width, double height){
+showCostDialog(BuildContext context, double width, double height, String screenType){
 
   double finalLoan = (MainPage.loanValue + MainPage.loanValue/100 ) / MainPage.timePeriod;
 
@@ -26,7 +26,13 @@ showCostDialog(BuildContext context, double width, double height){
                   context,
                   PageTransition(
                     type: PageTransitionType.fade,
-                    child: DetailsPage(loanValue: finalLoan, timePeriod: MainPage.timePeriod,),
+                    child: DetailsPage(
+                        loanValue: finalLoan,
+                        timePeriod: MainPage.timePeriod,
+                        screenType: screenType,
+                        width: width,
+                        height: height * 1.5151, // this multiplication will give the full height of the screen
+                    ),
                   )
               );
             })

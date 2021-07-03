@@ -24,7 +24,7 @@ class ValidateButton extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: Theme.of(context).accentColor,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
         boxShadow: [ kBoxShadow ]
       ),
       child: MaterialButton(

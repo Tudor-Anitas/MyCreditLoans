@@ -21,7 +21,7 @@ class CancelButton extends StatelessWidget {
       height: height,
       color: Theme.of(context).backgroundColor,
       child: MaterialButton(
-        child: Text('Cancel', style: GoogleFonts.montserrat(fontSize: 24, color: kRedPigment, fontWeight: FontWeight.w500),),
+        child: Text('Cancel', style: GoogleFonts.montserrat(fontSize: 20, color: kRedPigment, fontWeight: FontWeight.w500),),
         onPressed: onPressed,
       ),
     );

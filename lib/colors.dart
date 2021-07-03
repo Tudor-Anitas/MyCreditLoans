@@ -14,7 +14,7 @@ Color kBlue = Color(0xffebebeb);
 
 /// Shadow for buttons and containers
 BoxShadow kBoxShadow = BoxShadow(
-    //color: kDarkGrey,
-    offset: Offset(0.0, 0.0),
-    blurRadius: 5.0
+    color: kGrey,
+    offset: Offset(1.0, 2.0),
+    blurRadius: 2.0
 );

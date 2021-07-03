@@ -55,6 +55,7 @@ class _LoanPeriodState extends State<LoanPeriod> {
                 child: DropdownButton(
                   value: MainPage.timePeriod,
                   items: timePeriods,
+                  style: Theme.of(context).textTheme.caption,
                   onChanged: (value){
                     setState(() {
                       MainPage.timePeriod = value as int;

@@ -8,10 +8,12 @@ class LoanForm extends StatefulWidget {
 
   late double width;
   late double height;
+  late String screenType;
 
   LoanForm({
     required this.width,
     required this.height,
+    required this.screenType
   });
 
   @override
@@ -20,6 +22,12 @@ class LoanForm extends StatefulWidget {
 
 class _LoanFormState extends State<LoanForm> {
 
+  // the space between text, slider and time period components
+  late double spaceSize;
+  // the space between time period and continue button
+  late double buttonMargin;
+  // the height of the loanPeriod component
+  late double loanPeriodHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -34,23 +42,44 @@ class _LoanFormState extends State<LoanForm> {
         children: [
           // the sized boxes are used to better
           // position the elements into the column
-          SizedBox(height: widget.height * 0.07,),
+          SizedBox(height: spaceSize,),
           Text('Please select the'),
           Text('desired loan'),
-          SizedBox(height: widget.height * 0.07,),
+          SizedBox(height: spaceSize,),
           LoanSlider(width: widget.width * 0.75,),
-          SizedBox(height: widget.height * 0.08,),
-          LoanPeriod(width: widget.width * 0.75, height: widget.height * 0.15),
-          SizedBox(height: widget.height * 0.3,),
+          SizedBox(height: spaceSize,),
+          LoanPeriod(width: widget.width * 0.75, height: loanPeriodHeight),
+          SizedBox(height: buttonMargin,),
           ValidateButton(
             width: widget.width * 0.75,
             height: widget.height * 0.08,
             onPressed: (){
-              showCostDialog(context, widget.width, widget.height);
+              showCostDialog(context, widget.width, widget.height, widget.screenType);
               },
           )
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // changes the sizes of different components depending on the screen size
+    switch(widget.screenType){
+      case 'large':
+        spaceSize = widget.height * 0.07;
+        buttonMargin = widget.height * 0.3;
+        loanPeriodHeight = widget.height * 0.15;
+        break;
+      case 'normal':
+        spaceSize = widget.height * 0.06;
+        buttonMargin = widget.height * 0.2;
+        loanPeriodHeight = widget.height * 0.2;
+        break;
+      case 'small':
+        break;
+    }
   }
 }

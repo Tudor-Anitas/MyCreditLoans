@@ -1,6 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:my_credit_loans/constraints.dart';
 import 'package:my_credit_loans/screens/details_page/components/details_form.dart';
+
+/// Gets the [height] of the device and will return the type of the scree size:
+/// 'small', 'normal' or 'large'
+String getScreenSizeType(double height){
+  if(height < kNORMAL_BREAKPOINT)
+    return 'small';
+  else if(height < kLARGE_BREAKPOINT)
+    return 'normal';
+  else
+    return 'large';
+}
 
 /// This method will do a get request to a random number generator API
 /// to provide a number representing the score of the user
@@ -37,7 +49,7 @@ class InputValidators{
     // if there is a space but at the end of the string
     // RETURN the error
     if(value!.length < 3 || !value.contains(' ') || (value.contains(' ') && value.endsWith(' ')))
-      return 'Incorrect name';
+      return '';
     return null;
   };
 
@@ -54,7 +66,7 @@ class InputValidators{
   // RETURN the error
   Function incomeValidator = (String? value){
     if(value!.length < 1)
-      return 'Incorrect income';
+      return '';
     return null;
   };
 }

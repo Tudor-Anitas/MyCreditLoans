@@ -14,6 +14,7 @@ class DetailsForm extends StatefulWidget {
 
   late double width;
   late double height;
+  late String screenType;
   // keeps the state of the employed and unemployed buttons
   static bool isEmployed = false;
 
@@ -21,7 +22,8 @@ class DetailsForm extends StatefulWidget {
   /// economical state of the user before creating a score for the request
   DetailsForm({
     required this.width,
-    required this.height
+    required this.height,
+    required this.screenType
   });
 
   @override
@@ -34,6 +36,9 @@ class _DetailsFormState extends State<DetailsForm> {
   TextEditingController name = TextEditingController();
   TextEditingController job = TextEditingController();
   TextEditingController income = TextEditingController();
+
+  // the space between the continue button and the pick image button
+  late double buttonMargin;
 
   // snackBars to be shown in case of errors or exceptions
   SnackBar _invalidInputSnackBar = SnackBar(content: Text('Please fill all the fields!'));
@@ -62,7 +67,7 @@ class _DetailsFormState extends State<DetailsForm> {
 
     // if the form is not null and
     // the state is validated and
-    // the images was picked from the gallery
+    // the image was picked from the gallery
     // go to the ResultsPage
     if(_formKey.currentState != null &&
         _formKey.currentState!.validate() &&
@@ -107,15 +112,15 @@ class _DetailsFormState extends State<DetailsForm> {
               controller: job,
               validator: InputValidators().jobValidator
             ),
-            SizedBox(height: widget.height * 0.005,),
+            SizedBox(height: widget.height * 0.02,),
             Container(
               width: widget.width * 0.75,
               height: widget.height * 0.25,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: widget.width * 0.02),
                     child: Column(
                       children: [
                         Input(
@@ -147,7 +152,7 @@ class _DetailsFormState extends State<DetailsForm> {
                 ],
               ),
             ),
-            SizedBox(height: widget.height * 0.15,),
+            SizedBox(height: buttonMargin,),
             ValidateButton(width: widget.width * 0.8, height: widget.height * 0.08, onPressed: () async{
               await validator();
             })
@@ -155,5 +160,21 @@ class _DetailsFormState extends State<DetailsForm> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    switch(widget.screenType){
+      case 'large':
+        buttonMargin = widget.height * 0.15;
+        break;
+      case 'normal':
+        buttonMargin = widget.height * 0.1;
+        break;
+      case 'small':
+        break;
+    }
   }
 }
