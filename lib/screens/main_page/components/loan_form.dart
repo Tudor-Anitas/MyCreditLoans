@@ -8,8 +8,11 @@ class LoanForm extends StatefulWidget {
 
   late double width;
   late double height;
+  /// it describes the resolution of the device, 'small', 'normal' or 'large'
   late String screenType;
 
+  /// Creates a form widget containing a slider for the amount of the loan
+  /// and a dropdown menu with multiple time periods to complete the loan
   LoanForm({
     required this.width,
     required this.height,
@@ -22,11 +25,11 @@ class LoanForm extends StatefulWidget {
 
 class _LoanFormState extends State<LoanForm> {
 
-  // the space between text, slider and time period components
+  /// the space between text, slider and time period components
   late double spaceSize;
-  // the space between time period and continue button
+  /// the space between time period and continue button
   late double buttonMargin;
-  // the height of the loanPeriod component
+  /// the height of the loanPeriod component
   late double loanPeriodHeight;
 
   @override
@@ -79,6 +82,9 @@ class _LoanFormState extends State<LoanForm> {
         loanPeriodHeight = widget.height * 0.2;
         break;
       case 'small':
+        spaceSize = widget.height * 0.05;
+        buttonMargin = widget.height * 0.2;
+        loanPeriodHeight = widget.height * 0.2;
         break;
     }
   }

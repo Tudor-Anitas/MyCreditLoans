@@ -9,6 +9,7 @@ class SimpleButton extends StatelessWidget {
   late Function() onPressed;
   String? text;
 
+  /// Creates a simple button with a onPressed action
   SimpleButton({
     required this.width,
     required this.height,

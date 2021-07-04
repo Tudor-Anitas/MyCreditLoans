@@ -14,8 +14,9 @@ class DetailsForm extends StatefulWidget {
 
   late double width;
   late double height;
+  /// It describes the resolution of the device, 'small', 'normal' or 'large'
   late String screenType;
-  // keeps the state of the employed and unemployed buttons
+  /// Keeps the state of the employed and unemployed buttons
   static bool isEmployed = false;
 
   /// Creates a form used to gather the remaining information about the
@@ -37,10 +38,10 @@ class _DetailsFormState extends State<DetailsForm> {
   TextEditingController job = TextEditingController();
   TextEditingController income = TextEditingController();
 
-  // the space between the continue button and the pick image button
+  /// the space between the continue button and the pick image button
   late double buttonMargin;
 
-  // snackBars to be shown in case of errors or exceptions
+  /// snackBars to be shown in case of errors or exceptions
   SnackBar _invalidInputSnackBar = SnackBar(content: Text('Please fill all the fields!'));
   SnackBar _httpErrorSnackBar = SnackBar(content: Text('A problem occurred with your request! Try again later'));
 
@@ -56,7 +57,7 @@ class _DetailsFormState extends State<DetailsForm> {
   /// This method validates the form to check for errors and to fetch the score
   /// from the API
   validator() async{
-    // fetch the score from the API
+    /// fetch the score from the API
     int score = await getScore();
 
     // if there is a internet problem or response code other than 'OK', halt the operation
@@ -138,7 +139,7 @@ class _DetailsFormState extends State<DetailsForm> {
                           child: Column(
                             children: [
                               Text('Please add a photo', style: Theme.of(context).textTheme.caption,),
-                              Text('with your last bill', style: Theme.of(context).textTheme.caption)
+                              Text('with your last bill', style: Theme.of(context).textTheme.caption,)
                             ],
                           ),
                         ),
@@ -165,7 +166,7 @@ class _DetailsFormState extends State<DetailsForm> {
   @override
   void initState() {
     super.initState();
-
+    // changes the sizes of different components depending on the screen size
     switch(widget.screenType){
       case 'large':
         buttonMargin = widget.height * 0.15;
@@ -174,6 +175,7 @@ class _DetailsFormState extends State<DetailsForm> {
         buttonMargin = widget.height * 0.1;
         break;
       case 'small':
+        buttonMargin = widget.height * 0.1;
         break;
     }
   }

@@ -5,8 +5,11 @@ import 'package:page_transition/page_transition.dart';
 
 class ResultsPage extends StatelessWidget {
 
+  /// The loan score fetched from the API
   late int score;
 
+  /// Will show the score result fetched from the API
+  /// using the accentColor if it's 7 or above or the errorColor otherwise
   ResultsPage({required this.score});
 
   @override
@@ -15,7 +18,7 @@ class ResultsPage extends StatelessWidget {
     // takes the size of the screen
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
-
+    // if the score from the API is bigger or equal to 7, the result is successful
     bool isSuccessful = score >= 7;
     TextStyle? headerStyle = Theme.of(context).textTheme.headline6;
 
@@ -34,9 +37,9 @@ class ResultsPage extends StatelessWidget {
 
               Text('Your credit score is', style: headerStyle,),
               Text('$score', style: Theme.of(context).textTheme.headline1,),
-              SizedBox(height: windowHeight * 0.25,),
+              SizedBox(height: windowHeight * 0.2,),
               SimpleButton(
-                width: windowWidth * 0.25,
+                width: windowWidth * 0.28,
                 height: windowHeight * 0.05,
                 text: 'Finish',
                 onPressed: (){

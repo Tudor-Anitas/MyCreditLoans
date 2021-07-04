@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Headline extends StatelessWidget {
 
   late double height;
-
+  /// Creates a headline using the headline2 textTheme of the application
   Headline({required this.height});
 
   @override

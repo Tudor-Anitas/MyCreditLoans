@@ -26,14 +26,15 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
 
-  // the height of the loanDisplay component
+  /// The height of the loanDisplay component
   late double loanDisplayHeight;
-  // the space between the loanDisplay and detailsForm
+  /// The space between the loanDisplay and detailsForm
   late double space;
 
   @override
   Widget build(BuildContext context) {
 
+    /// The state of the keyboard, can be open or closed
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
 
     return Scaffold(
@@ -61,7 +62,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   void initState() {
     super.initState();
-
+    // changes the sizes of different components depending on the screen size
     switch(widget.screenType){
       case 'large':
         loanDisplayHeight = widget.height * 0.2;
@@ -72,6 +73,8 @@ class _DetailsPageState extends State<DetailsPage> {
         space = widget.height * 0.05;
         break;
       case 'small':
+        loanDisplayHeight = widget.height * 0.25;
+        space = widget.height * 0.05;
         break;
     }
   }

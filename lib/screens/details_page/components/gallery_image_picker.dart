@@ -7,6 +7,7 @@ class GalleryImagePicker extends StatelessWidget {
   late double width;
   bool isSelected;
 
+  /// Creates a button widget to access the gallery and pick a image
   GalleryImagePicker({
     required this.width,
     this.isSelected = false,

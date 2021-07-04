@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_credit_loans/colors.dart';
 
+/// Custom theme created for the application
 class CustomTheme{
   static ThemeData get customTheme {
     return ThemeData(
@@ -20,7 +21,7 @@ class CustomTheme{
         headline6: GoogleFonts.montserrat(fontSize: 24, color: kSeaShell, fontWeight: FontWeight.w500),
         bodyText1: GoogleFonts.montserrat(fontSize: 20, color: kXiketic, fontWeight: FontWeight.normal),
         bodyText2: GoogleFonts.montserrat(fontSize: 18, color: kXiketic, fontWeight: FontWeight.normal),
-        caption: GoogleFonts.montserrat(fontSize: 12, color: kGrey),
+        caption: GoogleFonts.montserrat(fontSize: 10, color: kGrey),
         button: GoogleFonts.montserrat(fontSize: 20, color: kSeaShell, fontWeight: FontWeight.w500)
       )
     );

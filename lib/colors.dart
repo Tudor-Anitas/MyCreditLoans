@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 
 /// The main colors used in the application
-///
+
 Color kXiketic = Color(0xff10111D);
 Color kGreenCyan = Color(0xff00966B);
 Color kRedPigment = Color(0xffFD0122);

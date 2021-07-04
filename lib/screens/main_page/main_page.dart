@@ -6,9 +6,9 @@ import 'package:my_credit_loans/screens/main_page/components/loan_form.dart';
 
 class MainPage extends StatefulWidget {
 
-  // the value of the loan chosen by the user
+  /// the value of the loan chosen by the user
   static double loanValue = 100;
-  // how long is the loan in months
+  /// how long is the loan in months
   static int timePeriod = 1;
 
 
@@ -19,7 +19,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-  // the amount of money the user must pay monthly
+  /// the amount of money the user must pay monthly
   double monthlyPayment = 0;
 
   @override
@@ -32,8 +32,8 @@ class _MainPageState extends State<MainPage> {
     print(windowHeight);
     print(windowWidth);
 
-    // describes the size of the screen to better build the UI
-    // can be: 'small', 'normal', or 'large'
+    /// describes the size of the screen to better build the UI
+    /// can be: 'small', 'normal', or 'large'
     String screenSizeFlag = getScreenSizeType(windowHeight);
 
     return Scaffold(

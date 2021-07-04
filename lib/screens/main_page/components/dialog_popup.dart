@@ -6,9 +6,10 @@ import 'package:my_credit_loans/widgets/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
 
 
-
+/// It creates a dialog menu that shows the monthly rate of the loan
+/// it gives two actions, cancel and accept
 showCostDialog(BuildContext context, double width, double height, String screenType){
-
+  /// Represents the monthly loan after adding the interest
   double finalLoan = (MainPage.loanValue + MainPage.loanValue/100 ) / MainPage.timePeriod;
 
   showDialog(

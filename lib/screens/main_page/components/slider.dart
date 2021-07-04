@@ -4,7 +4,7 @@ import 'package:my_credit_loans/screens/main_page/main_page.dart';
 class LoanSlider extends StatefulWidget {
 
   late double width;
-
+  /// Creates a slider to choose the amount of loan needed
   LoanSlider({required this.width});
 
   @override

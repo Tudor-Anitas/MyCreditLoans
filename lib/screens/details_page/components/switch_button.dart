@@ -8,6 +8,7 @@ class SwitchButton extends StatefulWidget {
   late String title;
   bool isActive;
 
+  /// Creates a button that toggles the color between accentColor and disabledColor
   SwitchButton({
     required this.width,
     required this.height,
@@ -35,8 +36,8 @@ class _SwitchButtonState extends State<SwitchButton> {
             width: widget.width,
             padding: EdgeInsets.only(left: 10),
             child: Text('${widget.title}',
-              style: widget.isActive? GoogleFonts.montserrat(fontSize: 16, color: Theme.of(context).backgroundColor) :
-                                      GoogleFonts.montserrat(fontSize: 16, color: Theme.of(context).hintColor)
+              style: widget.isActive? GoogleFonts.montserrat(fontSize: 12, color: Theme.of(context).backgroundColor) :
+                                      GoogleFonts.montserrat(fontSize: 12, color: Theme.of(context).hintColor)
             )
         ),
       ),

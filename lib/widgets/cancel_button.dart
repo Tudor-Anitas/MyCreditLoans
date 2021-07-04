@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_credit_loans/colors.dart';
 
 class CancelButton extends StatelessWidget {
 
@@ -8,6 +7,7 @@ class CancelButton extends StatelessWidget {
   late double height;
   late var onPressed;
 
+  /// Creates a button used for canceling actions
   CancelButton({
     required this.width,
     required this.height,
@@ -21,7 +21,7 @@ class CancelButton extends StatelessWidget {
       height: height,
       color: Theme.of(context).backgroundColor,
       child: MaterialButton(
-        child: Text('Cancel', style: GoogleFonts.montserrat(fontSize: 20, color: kRedPigment, fontWeight: FontWeight.w500),),
+        child: Text('Cancel', style: GoogleFonts.montserrat(fontSize: 20, color: Theme.of(context).errorColor, fontWeight: FontWeight.w500),),
         onPressed: onPressed,
       ),
     );
