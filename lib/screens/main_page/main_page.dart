@@ -29,9 +29,6 @@ class _MainPageState extends State<MainPage> {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
 
-    print(windowHeight);
-    print(windowWidth);
-
     /// describes the size of the screen to better build the UI
     /// can be: 'small', 'normal', or 'large'
     String screenSizeFlag = getScreenSizeType(windowHeight);
