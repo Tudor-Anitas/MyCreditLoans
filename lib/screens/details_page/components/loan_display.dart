@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 
 class LoanDisplay extends StatelessWidget {
+  late final double width;
+  late final double height;
+  late final double loanValue;
+  late final int timePeriod;
 
-  late double width;
-  late double height;
-  late double loanValue;
-  late int timePeriod;
-
-  /// Displays the amount of money the user will pay every month, represented by
-  /// [loanValue] for the selected period of time, [timePeriod]
-  LoanDisplay({
-    required this.width,
-    required this.height,
-    required this.loanValue,
-    required this.timePeriod
-  });
+  LoanDisplay(
+      {required this.width,
+      required this.height,
+      required this.loanValue,
+      required this.timePeriod});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +26,18 @@ class LoanDisplay extends StatelessWidget {
         children: [
           Container(
               width: width,
-              child: Text('Payment per month', style: Theme.of(context).textTheme.headline6)
-          ),
+              child: Text('Payment per month',
+                  style: Theme.of(context).textTheme.headline6)),
           Container(width: width, child: Text('${loanValue.round()} RON')),
-          SizedBox(height: height * 0.05,),
-          Container(width: width, child: Text('Period of time', style: Theme.of(context).textTheme.headline6,)),
+          SizedBox(
+            height: height * 0.05,
+          ),
+          Container(
+              width: width,
+              child: Text(
+                'Period of time',
+                style: Theme.of(context).textTheme.headline6,
+              )),
           Container(width: width, child: Text('$timePeriod months'))
         ],
       ),

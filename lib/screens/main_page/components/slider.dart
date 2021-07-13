@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page/main_page.dart';
 
 class LoanSlider extends StatefulWidget {
+  late final double width;
 
-  late double width;
-  /// Creates a slider to choose the amount of loan needed
   LoanSlider({required this.width});
 
   @override
@@ -12,7 +11,6 @@ class LoanSlider extends StatefulWidget {
 }
 
 class _LoanSliderState extends State<LoanSlider> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +23,7 @@ class _LoanSliderState extends State<LoanSlider> {
             max: 1000,
             divisions: 18,
             label: '${MainPage.loanValue.toString()}',
-            onChanged: (newValue){
+            onChanged: (newValue) {
               setState(() {
                 MainPage.loanValue = newValue;
               });
@@ -34,8 +32,14 @@ class _LoanSliderState extends State<LoanSlider> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('100', style: Theme.of(context).textTheme.bodyText2,),
-              Text('1000', style: Theme.of(context).textTheme.bodyText2,)
+              Text(
+                '100',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              Text(
+                '1000',
+                style: Theme.of(context).textTheme.bodyText2,
+              )
             ],
           )
         ],

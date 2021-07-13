@@ -2,27 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page/main_page.dart';
 
 class LoanPeriod extends StatefulWidget {
+  late final double width;
+  late final double height;
 
-  late double width;
-  late double height;
-  /// Creates a dropdown menu with multiple time periods to complete the loan
-  LoanPeriod({
-    required this.width,
-    required this.height
-  });
+  LoanPeriod({required this.width, required this.height});
 
   @override
   _LoanPeriodState createState() => _LoanPeriodState();
 }
 
 class _LoanPeriodState extends State<LoanPeriod> {
-
-  /// defining the time periods for the loan
   List<DropdownMenuItem<int>> timePeriods = [
-    DropdownMenuItem(child: Text('1 month'), value: 1,),
-    DropdownMenuItem(child: Text('3 month'), value: 3,),
-    DropdownMenuItem(child: Text('6 month'), value: 6,),
-    DropdownMenuItem(child: Text('1 year'), value: 12,)
+    DropdownMenuItem(
+      child: Text('1 month'),
+      value: 1,
+    ),
+    DropdownMenuItem(
+      child: Text('3 month'),
+      value: 3,
+    ),
+    DropdownMenuItem(
+      child: Text('6 month'),
+      value: 6,
+    ),
+    DropdownMenuItem(
+      child: Text('1 year'),
+      value: 12,
+    )
   ];
 
   @override
@@ -53,17 +59,16 @@ class _LoanPeriodState extends State<LoanPeriod> {
             child: FittedBox(
               child: Center(
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    value: MainPage.timePeriod,
-                    items: timePeriods,
-                    style: Theme.of(context).textTheme.caption,
-                    onChanged: (value){
-                      setState(() {
-                        MainPage.timePeriod = value as int;
-                      });
-                    },
-                  )
-                ),
+                    child: DropdownButton(
+                  value: MainPage.timePeriod,
+                  items: timePeriods,
+                  style: Theme.of(context).textTheme.caption,
+                  onChanged: (value) {
+                    setState(() {
+                      MainPage.timePeriod = value as int;
+                    });
+                  },
+                )),
               ),
             ),
           )

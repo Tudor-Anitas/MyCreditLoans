@@ -4,17 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Input extends StatefulWidget {
+  late final double width;
+  late final double height;
+  late final TextEditingController controller;
+  final TextInputType inputType;
+  final double hintSize;
+  late final String hint;
 
-  late double width;
-  late double height;
-  late TextEditingController controller;
-  TextInputType inputType;
-  double hintSize;
-  late String hint;
+  late final validator;
 
-  late var validator;
-
-  /// Creates a text input to be displayed
   Input({
     required this.width,
     required this.height,
@@ -36,19 +34,17 @@ class _InputState extends State<Input> {
       width: widget.width,
       height: widget.height,
       child: TextFormField(
-        controller: widget.controller,
-        style: GoogleFonts.montserrat(fontSize: widget.hintSize),
-        keyboardType: widget.inputType,
-        validator: widget.validator,
-        decoration: InputDecoration(
-          labelText: widget.hint,
-          errorStyle: TextStyle(height: 0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(),
-          )
-        )
-      ),
+          controller: widget.controller,
+          style: GoogleFonts.montserrat(fontSize: widget.hintSize),
+          keyboardType: widget.inputType,
+          validator: widget.validator,
+          decoration: InputDecoration(
+              labelText: widget.hint,
+              errorStyle: TextStyle(height: 0),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: BorderSide(),
+              ))),
     );
   }
 }

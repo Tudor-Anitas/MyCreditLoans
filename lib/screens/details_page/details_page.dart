@@ -4,14 +4,12 @@ import 'package:my_credit_loans/screens/details_page/components/loan_display.dar
 
 class DetailsPage extends StatefulWidget {
 
-  late double loanValue;
-  late int timePeriod;
-  late String screenType;
-  late double width;
-  late double height;
+  late final double loanValue;
+  late final int timePeriod;
+  late final String screenType;
+  late final double width;
+  late final double height;
 
-  /// The page will display the selected loan plan and will provide a form
-  /// to get some information about the user to calculate its score
   DetailsPage({
     required this.loanValue,
     required this.timePeriod,
@@ -26,15 +24,13 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
 
-  /// The height of the loanDisplay component
   late double loanDisplayHeight;
-  /// The space between the loanDisplay and detailsForm
+
   late double space;
 
   @override
   Widget build(BuildContext context) {
 
-    /// The state of the keyboard, can be open or closed
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
 
     return Scaffold(
@@ -58,6 +54,7 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
     );
   }
+
 
   @override
   void initState() {

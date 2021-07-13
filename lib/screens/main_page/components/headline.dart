@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Headline extends StatelessWidget {
+  late final double height;
 
-  late double height;
-  /// Creates a headline using the headline2 textTheme of the application
   Headline({required this.height});
 
   @override
@@ -14,9 +13,8 @@ class Headline extends StatelessWidget {
         Container(
             height: height,
             child: Center(
-                child: Text('Welcome!', style: Theme.of(context).textTheme.headline2)
-            )
-        ),
+                child: Text('Welcome!',
+                    style: Theme.of(context).textTheme.headline2))),
       ],
     );
   }
