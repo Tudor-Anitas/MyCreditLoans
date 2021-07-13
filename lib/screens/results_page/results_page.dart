@@ -18,8 +18,8 @@ class ResultsPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: isSuccessful
-          ? Theme.of(context).accentColor
-          : Theme.of(context).errorColor,
+          ? Theme.of(context).colorScheme.primary
+          : Theme.of(context).colorScheme.error,
       body: Container(
         width: windowWidth,
         height: windowHeight,
@@ -41,12 +41,12 @@ class ResultsPage extends StatelessWidget {
                 ? Icon(
                     Icons.cake,
                     size: 40,
-                    color: Theme.of(context).backgroundColor,
+                    color: Theme.of(context).colorScheme.background,
                   )
                 : Icon(
                     Icons.mood_bad,
                     size: 40,
-                    color: Theme.of(context).backgroundColor,
+                    color: Theme.of(context).colorScheme.background,
                   ),
             Text(
               'Your credit score is',
@@ -60,8 +60,6 @@ class ResultsPage extends StatelessWidget {
               height: windowHeight * 0.2,
             ),
             SimpleButton(
-              width: windowWidth * 0.28,
-              height: windowHeight * 0.05,
               text: 'Finish',
               onPressed: () {
                 Navigator.pushReplacement(

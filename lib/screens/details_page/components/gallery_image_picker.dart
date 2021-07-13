@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../colors.dart';
-
 class GalleryImagePicker extends StatelessWidget {
   late final double width;
   final bool isSelected;
@@ -17,7 +15,8 @@ class GalleryImagePicker extends StatelessWidget {
         width: width,
         height: width,
         decoration: BoxDecoration(
-            color: kBlue, borderRadius: BorderRadius.all(Radius.circular(8))),
+            color: Theme.of(context).disabledColor,
+            borderRadius: BorderRadius.all(Radius.circular(8))),
         child: isSelected
             ? Icon(
                 Icons.check,

@@ -18,7 +18,7 @@ class LoanDisplay extends StatelessWidget {
       padding:
           EdgeInsets.only(top: windowHeight * 0.03, left: windowWidth * 0.05),
       decoration: BoxDecoration(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(

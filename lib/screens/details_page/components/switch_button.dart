@@ -26,7 +26,7 @@ class _SwitchButtonState extends State<SwitchButton> {
       height: widget.height,
       decoration: BoxDecoration(
           color: widget.isActive
-              ? Theme.of(context).toggleableActiveColor
+              ? Theme.of(context).colorScheme.primary
               : Theme.of(context).disabledColor,
           borderRadius: BorderRadius.all(Radius.circular(8))),
       child: Center(
@@ -36,7 +36,7 @@ class _SwitchButtonState extends State<SwitchButton> {
             child: Text('${widget.title}',
                 style: widget.isActive
                     ? GoogleFonts.montserrat(
-                        fontSize: 12, color: Theme.of(context).backgroundColor)
+                        fontSize: 12, color: Theme.of(context).colorScheme.background)
                     : GoogleFonts.montserrat(
                         fontSize: 12, color: Theme.of(context).hintColor))),
       ),

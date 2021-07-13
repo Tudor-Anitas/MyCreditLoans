@@ -14,7 +14,7 @@ class CancelButton extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: MaterialButton(
         child: Text(
           'Cancel',

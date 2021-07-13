@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/colors.dart';
+
+import '../theme.dart';
 
 class ValidateButton extends StatelessWidget {
   late final width;
@@ -23,9 +24,9 @@ class ValidateButton extends StatelessWidget {
       width: width != 0.0 ? width : windowWidth * 0.75,
       height: height != 0.0 ? height : windowHeight * 0.065,
       decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: [kBoxShadow]),
+          boxShadow: [CustomTheme().boxShadow]),
       child: MaterialButton(
           child: Text(
             '$text',

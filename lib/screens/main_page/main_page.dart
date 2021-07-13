@@ -28,15 +28,7 @@ class _MainPageState extends State<MainPage> {
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Headline(
-                height: windowHeight * 0.34,
-              ),
-              LoanForm(
-                // width: windowWidth,
-                // height: windowHeight * 0.66,
-              )
-            ],
+            children: [Headline(), LoanForm()],
           ),
         ),
       ),

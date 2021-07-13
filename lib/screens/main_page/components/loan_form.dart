@@ -21,7 +21,7 @@ class _LoanFormState extends State<LoanForm> {
       width: windowWidth,
       height: windowHeight * 0.66,
       decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20))),
       child: Column(

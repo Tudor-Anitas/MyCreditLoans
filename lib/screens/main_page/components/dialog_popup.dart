@@ -20,7 +20,7 @@ showCostDialog(BuildContext context, double width, double height) {
               style: Theme.of(context).textTheme.bodyText2),
           content: Text(
               'The loan selected is: ${MainPage.loanValue.round()} RON, for ${MainPage.timePeriod} $periodPlural, the payment for every month will be ${finalLoan.round()} RON'),
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           contentPadding: EdgeInsets.fromLTRB(24.0, 20.0, 24.0, height * 0.21),
           actions: [
             CancelButton(

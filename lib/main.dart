@@ -1,6 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/colors.dart';
 import 'package:my_credit_loans/screens/main_page/main_page.dart';
 import 'package:my_credit_loans/theme.dart';
 
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
         ),
         nextScreen: MainPage(),
         splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: kXiketic,
       ),
     );
   }

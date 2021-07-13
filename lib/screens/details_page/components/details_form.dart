@@ -67,7 +67,7 @@ class _DetailsFormState extends State<DetailsForm> {
       width: windowWidth,
       height: windowHeight * 0.65,
       decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).colorScheme.background,
           borderRadius: const BorderRadius.only(
               topRight: Radius.circular(20), topLeft: Radius.circular(20))),
       child: Form(
