@@ -40,8 +40,6 @@ showCostDialog(BuildContext context, double width, double height) {
                         child: DetailsPage(
                           loanValue: finalLoan,
                           timePeriod: MainPage.timePeriod,
-                          width: width,
-                          height: height * 1.5151,
                         ),
                       ));
                 })

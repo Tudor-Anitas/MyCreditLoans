@@ -5,47 +5,38 @@ import 'package:my_credit_loans/screens/details_page/components/loan_display.dar
 class DetailsPage extends StatefulWidget {
   late final double loanValue;
   late final int timePeriod;
-  late final double width;
-  late final double height;
 
-  DetailsPage(
-      {required this.loanValue,
-      required this.timePeriod,
-      required this.width,
-      required this.height});
+  DetailsPage({
+    required this.loanValue,
+    required this.timePeriod,
+  });
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  late double loanDisplayHeight;
-
-  late double space;
-
   @override
   Widget build(BuildContext context) {
-    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
+    double windowWidth = MediaQuery.of(context).size.width;
+    double windowHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        width: widget.width,
-        height: widget.height,
+        width: windowWidth,
+        height: windowHeight,
         child: Column(
           children: [
             SizedBox(
-              height: widget.height * 0.05,
+              height: windowHeight * 0.05,
             ),
             LoanDisplay(
-                width: widget.width * 0.85,
-                height: isKeyboardOpen ? 0 : loanDisplayHeight,
-                loanValue: widget.loanValue,
-                timePeriod: widget.timePeriod),
+                loanValue: widget.loanValue, timePeriod: widget.timePeriod),
             SizedBox(
-              height: space,
+              height: windowHeight * 0.05,
             ),
-            DetailsForm(width: widget.width * 0.9, height: widget.height * 0.65)
+            DetailsForm()
           ],
         ),
       ),

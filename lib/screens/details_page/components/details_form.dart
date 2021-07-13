@@ -11,12 +11,7 @@ import 'package:page_transition/page_transition.dart';
 
 /// Creates a form to get information about the user
 class DetailsForm extends StatefulWidget {
-  late final double width;
-  late final double height;
   static bool isEmployed = false;
-
-  DetailsForm(
-      {required this.width, required this.height});
 
   @override
   _DetailsFormState createState() => _DetailsFormState();
@@ -26,8 +21,6 @@ class _DetailsFormState extends State<DetailsForm> {
   TextEditingController name = TextEditingController();
   TextEditingController job = TextEditingController();
   TextEditingController income = TextEditingController();
-
-  late double buttonMargin;
 
   SnackBar _invalidInputSnackBar =
       SnackBar(content: Text('Please fill all the fields!'));
@@ -68,9 +61,11 @@ class _DetailsFormState extends State<DetailsForm> {
 
   @override
   Widget build(BuildContext context) {
+    double windowWidth = MediaQuery.of(context).size.width;
+    double windowHeight = MediaQuery.of(context).size.height;
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: windowWidth,
+      height: windowHeight * 0.65,
       decoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
           borderRadius: BorderRadius.only(
@@ -80,39 +75,35 @@ class _DetailsFormState extends State<DetailsForm> {
         child: Column(
           children: [
             SizedBox(
-              height: widget.height * 0.05,
+              height: windowHeight * 0.6 * 0.05,
             ),
             Text('Please complete the'),
             Text('form to continue'),
             SizedBox(
-              height: widget.height * 0.05,
+              height: windowHeight * 0.6 * 0.05,
             ),
             Input(
-              width: widget.width * 0.75,
-              height: widget.height * 0.08,
               hint: 'Last and first name',
               controller: name,
               validator: InputValidators().nameValidator,
             ),
             SizedBox(
-              height: widget.height * 0.02,
+              height: windowHeight * 0.6 * 0.02,
             ),
-            EmploymentStatus(width: widget.width, height: widget.height),
+            EmploymentStatus(width: windowWidth, height: windowHeight * 0.6),
             SizedBox(
-              height: widget.height * 0.02,
+              height: windowHeight * 0.6 * 0.02,
             ),
             Input(
-                width: widget.width * 0.75,
-                height: widget.height * 0.08,
                 hint: 'Job title',
                 controller: job,
                 validator: InputValidators().jobValidator),
             SizedBox(
-              height: widget.height * 0.02,
+              height: windowHeight * 0.6 * 0.02,
             ),
             Container(
-              width: widget.width * 0.75,
-              height: widget.height * 0.25,
+              width: windowWidth * 0.75,
+              height: windowHeight * 0.6 * 0.25,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,18 +111,20 @@ class _DetailsFormState extends State<DetailsForm> {
                   Container(
                     child: Column(
                       children: [
-                        Input(
-                          width: widget.width * 0.35,
-                          height: widget.height * 0.08,
-                          hint: 'Monthly income',
-                          inputType: TextInputType.number,
-                          hintSize: 14,
-                          controller: income,
-                          validator: InputValidators().incomeValidator,
+                        Container(
+                          width: windowWidth * 0.3,
+                          child: Input(
+                            hint: 'Monthly income',
+                            inputType: TextInputType.number,
+                            hintSize: 14,
+                            controller: income,
+                            validator: InputValidators().incomeValidator,
+                          ),
                         ),
                         Container(
-                          width: widget.width * 0.35,
-                          margin: EdgeInsets.only(top: widget.height * 0.05),
+                          width: windowWidth * 0.35,
+                          margin:
+                              EdgeInsets.only(top: windowHeight * 0.6 * 0.05),
                           child: Column(
                             children: [
                               Text(
@@ -151,19 +144,16 @@ class _DetailsFormState extends State<DetailsForm> {
                   GestureDetector(
                       onTap: pickImage,
                       child: GalleryImagePicker(
-                        width: widget.width * 0.3,
+                        width: windowWidth * 0.3,
                         isSelected: galleryImage != null,
                       ))
                 ],
               ),
             ),
-            SizedBox(
-              height: buttonMargin,
-            ),
-            ValidateButton(
-                onPressed: () async {
-                  await validator();
-                })
+            SizedBox(height: windowHeight * 0.05),
+            ValidateButton(onPressed: () async {
+              await validator();
+            })
           ],
         ),
       ),

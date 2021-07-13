@@ -33,15 +33,16 @@ class _LoanPeriodState extends State<LoanPeriod> {
     return Container(
       width: windowWidth * 0.8,
       height: windowHeight * 0.2,
-      //color: Colors.blue,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: windowWidth * 0.35,
-            //color: Colors.amber,
-            child: Text('The period of time for the loan', textAlign: TextAlign.left,),
+            child: Text(
+              'The period of time for the loan',
+              textAlign: TextAlign.left,
+            ),
           ),
           Container(
             width: windowWidth * 0.3,
