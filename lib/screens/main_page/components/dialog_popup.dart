@@ -6,10 +6,11 @@ import 'package:my_credit_loans/widgets/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
 
 /// Shows dialog with loan info
-showCostDialog(
-    BuildContext context, double width, double height, String screenType) {
+showCostDialog(BuildContext context, double width, double height) {
   double finalLoan =
       (MainPage.loanValue + MainPage.loanValue / 100) / MainPage.timePeriod;
+
+  String periodPlural = MainPage.timePeriod == 1? 'month' : 'months';
 
   showDialog(
       context: context,
@@ -18,7 +19,7 @@ showCostDialog(
           title: Text('The applied interest is 1%',
               style: Theme.of(context).textTheme.bodyText2),
           content: Text(
-              'the payment for every month will be ${finalLoan.round()} RON'),
+              'The loan selected is: ${MainPage.loanValue.round()} RON, for ${MainPage.timePeriod} $periodPlural, the payment for every month will be ${finalLoan.round()} RON'),
           backgroundColor: Theme.of(context).backgroundColor,
           contentPadding: EdgeInsets.fromLTRB(24.0, 20.0, 24.0, height * 0.21),
           actions: [
@@ -30,7 +31,6 @@ showCostDialog(
                 }),
             ValidateButton(
                 width: width * 0.3,
-                height: height * 0.07,
                 text: 'Accept',
                 onPressed: () {
                   Navigator.push(
@@ -40,7 +40,6 @@ showCostDialog(
                         child: DetailsPage(
                           loanValue: finalLoan,
                           timePeriod: MainPage.timePeriod,
-                          screenType: screenType,
                           width: width,
                           height: height * 1.5151,
                         ),

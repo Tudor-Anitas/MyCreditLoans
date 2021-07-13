@@ -13,11 +13,10 @@ import 'package:page_transition/page_transition.dart';
 class DetailsForm extends StatefulWidget {
   late final double width;
   late final double height;
-  late final String screenType;
   static bool isEmployed = false;
 
   DetailsForm(
-      {required this.width, required this.height, required this.screenType});
+      {required this.width, required this.height});
 
   @override
   _DetailsFormState createState() => _DetailsFormState();
@@ -162,8 +161,6 @@ class _DetailsFormState extends State<DetailsForm> {
               height: buttonMargin,
             ),
             ValidateButton(
-                width: widget.width * 0.8,
-                height: widget.height * 0.08,
                 onPressed: () async {
                   await validator();
                 })
@@ -171,22 +168,5 @@ class _DetailsFormState extends State<DetailsForm> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // changes the sizes of different components depending on the screen size
-    switch (widget.screenType) {
-      case 'large':
-        buttonMargin = widget.height * 0.15;
-        break;
-      case 'normal':
-        buttonMargin = widget.height * 0.1;
-        break;
-      case 'small':
-        buttonMargin = widget.height * 0.1;
-        break;
-    }
   }
 }

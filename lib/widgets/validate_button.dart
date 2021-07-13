@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:my_credit_loans/colors.dart';
 
 class ValidateButton extends StatelessWidget {
-  late final double width;
-  late final double height;
+  late final width;
+  late final height;
   late final onPressed;
   final String text;
 
   ValidateButton({
-    required this.width,
-    required this.height,
+    this.width = 0.0,
+    this.height = 0.0,
     this.text = 'Continue',
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
+    double windowWidth = MediaQuery.of(context).size.width;
+    double windowHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      width: width,
-      height: height,
+      width: width != 0.0 ? width : windowWidth * 0.75,
+      height: height != 0.0 ? height : windowHeight * 0.065,
       decoration: BoxDecoration(
           color: Theme.of(context).accentColor,
           borderRadius: BorderRadius.all(Radius.circular(5)),

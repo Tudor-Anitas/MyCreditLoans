@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page/main_page.dart';
 
 class LoanPeriod extends StatefulWidget {
-  late final double width;
-  late final double height;
-
-  LoanPeriod({required this.width, required this.height});
-
   @override
   _LoanPeriodState createState() => _LoanPeriodState();
 }
@@ -33,29 +28,23 @@ class _LoanPeriodState extends State<LoanPeriod> {
 
   @override
   Widget build(BuildContext context) {
+    double windowWidth = MediaQuery.of(context).size.width;
+    double windowHeight = MediaQuery.of(context).size.height;
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: windowWidth * 0.8,
+      height: windowHeight * 0.2,
+      //color: Colors.blue,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: widget.width * 0.48,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  children: [
-                    Text('The period'),
-                    Text('of time for'),
-                    Text('the loan')
-                  ],
-                ),
-              ],
-            ),
+            width: windowWidth * 0.35,
+            //color: Colors.amber,
+            child: Text('The period of time for the loan', textAlign: TextAlign.left,),
           ),
           Container(
-            width: widget.width * 0.3,
+            width: windowWidth * 0.3,
             child: FittedBox(
               child: Center(
                 child: DropdownButtonHideUnderline(

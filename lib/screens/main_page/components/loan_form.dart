@@ -5,30 +5,21 @@ import 'package:my_credit_loans/screens/main_page/components/slider.dart';
 import 'package:my_credit_loans/widgets/validate_button.dart';
 
 class LoanForm extends StatefulWidget {
-  late final double width;
-  late final double height;
-
-  late final String screenType;
-
-  LoanForm(
-      {required this.width, required this.height, required this.screenType});
-
   @override
   _LoanFormState createState() => _LoanFormState();
 }
 
 class _LoanFormState extends State<LoanForm> {
-  late double spaceSize;
-
-  late double buttonMargin;
-
   late double loanPeriodHeight;
 
   @override
   Widget build(BuildContext context) {
+    double windowWidth = MediaQuery.of(context).size.width;
+    double windowHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: windowWidth,
+      height: windowHeight * 0.66,
       decoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
           borderRadius: BorderRadius.only(
@@ -36,57 +27,33 @@ class _LoanFormState extends State<LoanForm> {
       child: Column(
         children: [
           SizedBox(
-            height: spaceSize,
+            height: windowHeight * 0.05,
           ),
-          Text('Please select the'),
-          Text('desired loan'),
+          Container(
+            width: windowWidth * 0.35,
+            child: Text(
+              'Please select the desired loan',
+              textAlign: TextAlign.center,
+            ),
+          ),
           SizedBox(
-            height: spaceSize,
+            height: windowHeight * 0.05,
           ),
-          LoanSlider(
-            width: widget.width * 0.75,
-          ),
+          LoanSlider(),
           SizedBox(
-            height: spaceSize,
+            height: windowHeight * 0.02,
           ),
-          LoanPeriod(width: widget.width * 0.75, height: loanPeriodHeight),
+          LoanPeriod(),
           SizedBox(
-            height: buttonMargin,
+            height: windowHeight * 0.08,
           ),
           ValidateButton(
-            width: widget.width * 0.75,
-            height: widget.height * 0.08,
             onPressed: () {
-              showCostDialog(
-                  context, widget.width, widget.height, widget.screenType);
+              showCostDialog(context, windowWidth, windowHeight);
             },
           )
         ],
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    // changes the sizes of different components depending on the screen size
-    switch (widget.screenType) {
-      case 'large':
-        spaceSize = widget.height * 0.07;
-        buttonMargin = widget.height * 0.3;
-        loanPeriodHeight = widget.height * 0.15;
-        break;
-      case 'normal':
-        spaceSize = widget.height * 0.06;
-        buttonMargin = widget.height * 0.2;
-        loanPeriodHeight = widget.height * 0.2;
-        break;
-      case 'small':
-        spaceSize = widget.height * 0.05;
-        buttonMargin = widget.height * 0.2;
-        loanPeriodHeight = widget.height * 0.2;
-        break;
-    }
   }
 }

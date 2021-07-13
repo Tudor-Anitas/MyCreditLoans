@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page/main_page.dart';
 
 class LoanSlider extends StatefulWidget {
-  late final double width;
-
-  LoanSlider({required this.width});
 
   @override
   _LoanSliderState createState() => _LoanSliderState();
 }
 
 class _LoanSliderState extends State<LoanSlider> {
+
   @override
   Widget build(BuildContext context) {
+    double windowWidth = MediaQuery.of(context).size.width;
+
     return Container(
-      width: widget.width,
+      width: windowWidth * 0.75,
       child: Column(
         children: [
           Slider(
