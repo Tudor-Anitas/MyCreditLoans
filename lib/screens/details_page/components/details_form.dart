@@ -68,7 +68,7 @@ class _DetailsFormState extends State<DetailsForm> {
       height: windowHeight * 0.65,
       decoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(20), topLeft: Radius.circular(20))),
       child: Form(
         key: _formKey,
@@ -77,27 +77,34 @@ class _DetailsFormState extends State<DetailsForm> {
             SizedBox(
               height: windowHeight * 0.6 * 0.05,
             ),
-            Text('Please complete the'),
-            Text('form to continue'),
+            Container(
+              child: const Text('Please complete the form to continue'),
+            ),
             SizedBox(
               height: windowHeight * 0.6 * 0.05,
             ),
-            Input(
-              hint: 'Last and first name',
-              controller: name,
-              validator: InputValidators().nameValidator,
+            Container(
+              width: windowWidth * 0.75,
+              child: Input(
+                hint: 'First and last name',
+                controller: name,
+                validator: InputValidators().nameValidator,
+              ),
             ),
             SizedBox(
               height: windowHeight * 0.6 * 0.02,
             ),
-            EmploymentStatus(width: windowWidth, height: windowHeight * 0.6),
+            EmploymentStatus(),
             SizedBox(
               height: windowHeight * 0.6 * 0.02,
             ),
-            Input(
-                hint: 'Job title',
-                controller: job,
-                validator: InputValidators().jobValidator),
+            Container(
+              width: windowWidth * 0.75,
+              child: Input(
+                  hint: 'Job title',
+                  controller: job,
+                  validator: InputValidators().jobValidator),
+            ),
             SizedBox(
               height: windowHeight * 0.6 * 0.02,
             ),
@@ -112,7 +119,7 @@ class _DetailsFormState extends State<DetailsForm> {
                     child: Column(
                       children: [
                         Container(
-                          width: windowWidth * 0.3,
+                          width: windowWidth * 0.35,
                           child: Input(
                             hint: 'Monthly income',
                             inputType: TextInputType.number,

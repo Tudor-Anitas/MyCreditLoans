@@ -10,9 +10,11 @@ class LoanDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
+    bool isKeyboardOpen =
+        MediaQuery.of(context).viewInsets.bottom != 0 ? true : false;
     return Container(
       width: windowWidth * 0.9,
-      height: windowHeight * 0.25,
+      height: isKeyboardOpen ? 0 : windowHeight * 0.25,
       padding:
           EdgeInsets.only(top: windowHeight * 0.03, left: windowWidth * 0.05),
       decoration: BoxDecoration(

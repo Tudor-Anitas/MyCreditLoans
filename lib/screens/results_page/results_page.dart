@@ -21,6 +21,8 @@ class ResultsPage extends StatelessWidget {
           ? Theme.of(context).accentColor
           : Theme.of(context).errorColor,
       body: Container(
+        width: windowWidth,
+        height: windowHeight,
         margin: EdgeInsets.only(top: windowHeight * 0.3),
         child: Center(
             child: Column(

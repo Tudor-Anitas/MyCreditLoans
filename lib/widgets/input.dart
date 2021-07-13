@@ -26,11 +26,7 @@ class Input extends StatefulWidget {
 class _InputState extends State<Input> {
   @override
   Widget build(BuildContext context) {
-    double windowWidth = MediaQuery.of(context).size.width;
-    double windowHeight = MediaQuery.of(context).size.height;
     return SizedBox(
-      width: windowWidth * 0.75,
-      height: windowHeight * 0.07,
       child: TextFormField(
           controller: widget.controller,
           style: GoogleFonts.montserrat(fontSize: widget.hintSize),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:my_credit_loans/screens/details_page/components/details_form.dart';
 
+
 /// Get score from API
 Future<int> getScore() async {
   try {
@@ -33,7 +34,7 @@ class InputValidators {
 
   Function jobValidator = (String? value) {
     if (DetailsForm.isEmployed && value!.length < 3)
-      return 'Incorrect job title';
+      return '';
     return null;
   };
 

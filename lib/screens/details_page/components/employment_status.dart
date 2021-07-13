@@ -3,10 +3,7 @@ import 'package:my_credit_loans/screens/details_page/components/details_form.dar
 import 'package:my_credit_loans/screens/details_page/components/switch_button.dart';
 
 class EmploymentStatus extends StatefulWidget {
-  late final double width;
-  late final double height;
 
-  EmploymentStatus({required this.width, required this.height});
 
   @override
   _EmploymentStatusState createState() => _EmploymentStatusState();
@@ -15,6 +12,8 @@ class EmploymentStatus extends StatefulWidget {
 class _EmploymentStatusState extends State<EmploymentStatus> {
   @override
   Widget build(BuildContext context) {
+    double windowWidth = MediaQuery.of(context).size.width;
+    double windowHeight = MediaQuery.of(context).size.height;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -25,13 +24,13 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
               });
             },
             child: SwitchButton(
-              width: widget.width * 0.35,
-              height: widget.height * 0.08,
+              width: windowWidth * 0.35,
+              height: windowHeight * 0.06,
               title: 'Employed',
               isActive: DetailsForm.isEmployed,
             )),
         SizedBox(
-          width: widget.width * 0.05,
+          width: windowWidth * 0.05,
         ),
         GestureDetector(
             onTap: () {
@@ -40,8 +39,8 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
               });
             },
             child: SwitchButton(
-              width: widget.width * 0.35,
-              height: widget.height * 0.08,
+              width: windowWidth * 0.35,
+              height: windowHeight * 0.06,
               title: 'Unemployed',
               isActive: !DetailsForm.isEmployed,
             ))
