@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/main_page/main_page.dart';
+import 'package:my_credit_loans/screens/loan_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoanPeriod extends StatefulWidget {
@@ -52,12 +52,12 @@ class _LoanPeriodState extends State<LoanPeriod> {
               child: Center(
                 child: DropdownButtonHideUnderline(
                     child: DropdownButton(
-                  value: MainPage.timePeriod,
+                  value: LoanPage.timePeriod,
                   items: timePeriods,
                   style: Theme.of(context).textTheme.caption,
                   onChanged: (value) {
                     setState(() {
-                      MainPage.timePeriod = value as int;
+                      LoanPage.timePeriod = value as int;
                     });
                   },
                 )),

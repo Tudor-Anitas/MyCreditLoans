@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:my_credit_loans/screens/details_page/components/details_form.dart';
+import 'package:my_credit_loans/common/details_form.dart';
 
 
 /// Get score from API
-Future<int> getScore() async {
+Future<int?> getScore() async {
+  int? score;
   try {
     Uri uri = Uri.parse(
         'http://www.randomnumberapi.com/api/v1.0/randomnumber?min=1&max=10&count=1');
@@ -13,15 +14,13 @@ Future<int> getScore() async {
 
     if (responseCode == 200) {
       var finalResponse = json.decode(response.body);
-      return finalResponse[0];
-    } else {
-      print(responseCode);
-      return -2;
-    }
+      score = finalResponse[0];
+    } 
   } catch (e) {
     print(e);
-    return -2;
   }
+
+  return score;
 }
 
 class InputValidators {

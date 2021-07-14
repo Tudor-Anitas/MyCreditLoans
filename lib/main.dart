@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/main_page/main_page.dart';
+import 'package:my_credit_loans/screens/loan_page.dart';
 import 'package:my_credit_loans/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         splash: FlutterLogo(
           size: 100.0,
         ),
-        nextScreen: MainPage(),
+        nextScreen: LoanPage(),
         splashTransition: SplashTransition.fadeTransition,
       ),
     );

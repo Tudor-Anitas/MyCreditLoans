@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Custom theme created for the application
 class CustomTheme {
-  BoxShadow boxShadow = BoxShadow(
-      color: Color(0xff696969), offset: Offset(1.0, 2.0), blurRadius: 2.0);
+  
 
   static ThemeData get customTheme {
     return ThemeData(

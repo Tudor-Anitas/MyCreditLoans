@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../theme.dart';
 
 class ValidateButton extends StatelessWidget {
   late final width;
@@ -23,7 +22,12 @@ class ValidateButton extends StatelessWidget {
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: [CustomTheme().boxShadow]),
+          boxShadow: [
+            BoxShadow(
+                color: Color(0xff696969),
+                offset: Offset(1.0, 2.0),
+                blurRadius: 2.0)
+          ]),
       child: MaterialButton(
           child: Text(
             AppLocalizations.of(context)!.continueBtn,

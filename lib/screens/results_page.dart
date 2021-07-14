@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/main_page/main_page.dart';
-import 'package:my_credit_loans/widgets/simple_button.dart';
+import 'package:my_credit_loans/screens/loan_page.dart';
+import 'package:my_credit_loans/common/simple_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -67,7 +67,7 @@ class ResultsPage extends StatelessWidget {
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        child: MainPage(), type: PageTransitionType.fade));
+                        child: LoanPage(), type: PageTransitionType.fade));
               },
             )
           ],

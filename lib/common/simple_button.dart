@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../theme.dart';
 
 class SimpleButton extends StatelessWidget {
   late final Function() onPressed;
@@ -18,7 +17,12 @@ class SimpleButton extends StatelessWidget {
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.all(Radius.circular(8)),
-          boxShadow: [CustomTheme().boxShadow]),
+          boxShadow: [
+            BoxShadow(
+                color: Color(0xff696969),
+                offset: Offset(1.0, 2.0),
+                blurRadius: 2.0)
+          ]),
       child: MaterialButton(
         child: Text(
           '$text',

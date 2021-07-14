@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/main_page/components/dialog_popup.dart';
-import 'package:my_credit_loans/screens/main_page/components/loan_period.dart';
-import 'package:my_credit_loans/screens/main_page/components/slider.dart';
-import 'package:my_credit_loans/widgets/validate_button.dart';
+import 'package:my_credit_loans/common/dialog_popup.dart';
+import 'package:my_credit_loans/common/loan_period.dart';
+import 'package:my_credit_loans/common/slider.dart';
+import 'package:my_credit_loans/common/validate_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoanForm extends StatefulWidget {

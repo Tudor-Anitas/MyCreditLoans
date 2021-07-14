@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/details_page/components/details_form.dart';
-import 'package:my_credit_loans/screens/details_page/components/loan_display.dart';
+import 'package:my_credit_loans/common/details_form.dart';
+import 'package:my_credit_loans/common/loan_display.dart';
 
 class DetailsPage extends StatefulWidget {
   late final double loanValue;

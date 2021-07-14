@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/details_page/details_page.dart';
-import 'package:my_credit_loans/screens/main_page/main_page.dart';
-import 'package:my_credit_loans/widgets/cancel_button.dart';
-import 'package:my_credit_loans/widgets/validate_button.dart';
+import 'package:my_credit_loans/screens/details_page.dart';
+import 'package:my_credit_loans/screens/loan_page.dart';
+import 'package:my_credit_loans/common/cancel_button.dart';
+import 'package:my_credit_loans/common/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Shows dialog with loan info
 showCostDialog(BuildContext context, double width, double height) {
   double finalLoan =
-      (MainPage.loanValue + MainPage.loanValue / 100) / MainPage.timePeriod;
+      (LoanPage.loanValue + LoanPage.loanValue / 100) / LoanPage.timePeriod;
 
   showDialog(
       context: context,
@@ -18,8 +18,8 @@ showCostDialog(BuildContext context, double width, double height) {
           title: Text(AppLocalizations.of(context)!.interestHeadline,
               style: Theme.of(context).textTheme.bodyText2),
           content: Text(AppLocalizations.of(context)!.loanSelected +
-              '${MainPage.loanValue.round()} RON, ' +
-              '${MainPage.timePeriod} ' +
+              '${LoanPage.loanValue.round()} RON, ' +
+              '${LoanPage.timePeriod} ' +
               AppLocalizations.of(context)!.months +
               AppLocalizations.of(context)!.paymentEveryMonth +
               '${finalLoan.round()} RON'),
@@ -41,7 +41,7 @@ showCostDialog(BuildContext context, double width, double height) {
                         type: PageTransitionType.fade,
                         child: DetailsPage(
                           loanValue: finalLoan,
-                          timePeriod: MainPage.timePeriod,
+                          timePeriod: LoanPage.timePeriod,
                         ),
                       ));
                 })

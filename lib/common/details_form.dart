@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_credit_loans/methods.dart';
-import 'package:my_credit_loans/screens/details_page/components/gallery_image_picker.dart';
-import 'package:my_credit_loans/screens/details_page/components/employment_status.dart';
-import 'package:my_credit_loans/screens/results_page/results_page.dart';
-import 'package:my_credit_loans/widgets/input.dart';
-import 'package:my_credit_loans/widgets/validate_button.dart';
+import 'package:my_credit_loans/common/gallery_image_picker.dart';
+import 'package:my_credit_loans/common/employment_status.dart';
+import 'package:my_credit_loans/screens/results_page.dart';
+import 'package:my_credit_loans/common/input.dart';
+import 'package:my_credit_loans/common/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,41 +23,44 @@ class _DetailsFormState extends State<DetailsForm> {
   TextEditingController job = TextEditingController();
   TextEditingController income = TextEditingController();
 
-  static PickedFile? galleryImage; // the image picked from the gallery
+  static PickedFile? _galleryImage; // the image picked from the gallery
   final GlobalKey<FormState> _formKey =
       GlobalKey<FormState>(); // key for the form
 
   /// Opens gallery to pick image
   pickImage() async {
-    galleryImage = await ImagePicker().getImage(source: ImageSource.gallery);
-    setState(() {});
+    PickedFile? pickedImage =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    setState(() {
+      _galleryImage = pickedImage;
+    });
   }
 
   /// Validates the form
-  validator() async {
-    SnackBar _invalidInputSnackBar = SnackBar(
+  validateForm() async {
+    SnackBar _invalidFormSnackBar = SnackBar(
         content: Text(AppLocalizations.of(context)!.snackBarInvalidInput));
     SnackBar _httpErrorSnackBar = SnackBar(
         content: Text(AppLocalizations.of(context)!.snackBarHttpError));
-    int score = await getScore();
 
-    if (score == -2) {
-      ScaffoldMessenger.of(context).showSnackBar(_httpErrorSnackBar);
-
-      return;
-    }
     if (_formKey.currentState != null &&
         _formKey.currentState!.validate() &&
-        galleryImage != null)
-      Navigator.push(
-          context,
-          PageTransition(
-              child: ResultsPage(
-                score: score,
-              ),
-              type: PageTransitionType.fade));
-    else
-      ScaffoldMessenger.of(context).showSnackBar(_invalidInputSnackBar);
+        _galleryImage != null) {
+      int? score = await getScore();
+
+      if (score == null) {
+        ScaffoldMessenger.of(context).showSnackBar(_httpErrorSnackBar);
+      } else {
+        Navigator.push(
+            context,
+            PageTransition(
+                child: ResultsPage(
+                  score: score,
+                ),
+                type: PageTransitionType.fade));
+      }
+    } else
+      ScaffoldMessenger.of(context).showSnackBar(_invalidFormSnackBar);
   }
 
   @override
@@ -145,14 +148,14 @@ class _DetailsFormState extends State<DetailsForm> {
                       onTap: pickImage,
                       child: GalleryImagePicker(
                         width: windowWidth * 0.3,
-                        isSelected: galleryImage != null,
+                        isSelected: _galleryImage != null,
                       ))
                 ],
               ),
             ),
             SizedBox(height: windowHeight * 0.05),
             ValidateButton(onPressed: () async {
-              await validator();
+              await validateForm();
             })
           ],
         ),

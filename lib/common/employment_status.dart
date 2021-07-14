@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/details_page/components/details_form.dart';
-import 'package:my_credit_loans/screens/details_page/components/switch_button.dart';
+import 'package:my_credit_loans/common/details_form.dart';
+import 'package:my_credit_loans/common/switch_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class EmploymentStatus extends StatefulWidget {
 

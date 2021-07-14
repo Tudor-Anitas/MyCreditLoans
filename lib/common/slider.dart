@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/main_page/main_page.dart';
+import 'package:my_credit_loans/screens/loan_page.dart';
 
 class LoanSlider extends StatefulWidget {
 
@@ -18,14 +18,14 @@ class _LoanSliderState extends State<LoanSlider> {
       child: Column(
         children: [
           Slider(
-            value: MainPage.loanValue,
+            value: LoanPage.loanValue,
             min: 100,
             max: 1000,
             divisions: 18,
-            label: '${MainPage.loanValue.toString()}',
+            label: '${LoanPage.loanValue.toString()}',
             onChanged: (newValue) {
               setState(() {
-                MainPage.loanValue = newValue;
+                LoanPage.loanValue = newValue;
               });
             },
           ),
