@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoanDisplay extends StatelessWidget {
   late final double loanValue;
@@ -25,7 +26,7 @@ class LoanDisplay extends StatelessWidget {
         children: [
           Container(
               width: windowWidth,
-              child: Text('Payment per month',
+              child: Text(AppLocalizations.of(context)!.paymentHeadline,
                   style: Theme.of(context).textTheme.headline6)),
           Container(
               width: windowWidth, child: Text('${loanValue.round()} RON')),
@@ -35,10 +36,10 @@ class LoanDisplay extends StatelessWidget {
           Container(
               width: windowWidth,
               child: Text(
-                'Period of time',
+                AppLocalizations.of(context)!.periodOfTime,
                 style: Theme.of(context).textTheme.headline6,
               )),
-          Container(width: windowWidth, child: Text('$timePeriod months'))
+          Container(width: windowWidth, child: Text('$timePeriod ' + AppLocalizations.of(context)!.months))
         ],
       ),
     );

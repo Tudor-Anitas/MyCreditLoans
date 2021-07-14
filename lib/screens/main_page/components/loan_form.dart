@@ -3,6 +3,7 @@ import 'package:my_credit_loans/screens/main_page/components/dialog_popup.dart';
 import 'package:my_credit_loans/screens/main_page/components/loan_period.dart';
 import 'package:my_credit_loans/screens/main_page/components/slider.dart';
 import 'package:my_credit_loans/widgets/validate_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoanForm extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _LoanFormState extends State<LoanForm> {
           Container(
             width: windowWidth * 0.35,
             child: Text(
-              'Please select the desired loan',
+              AppLocalizations.of(context)!.loanHeadline,
               textAlign: TextAlign.center,
             ),
           ),

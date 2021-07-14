@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page/main_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoanPeriod extends StatefulWidget {
   @override
@@ -7,29 +8,30 @@ class LoanPeriod extends StatefulWidget {
 }
 
 class _LoanPeriodState extends State<LoanPeriod> {
-  List<DropdownMenuItem<int>> timePeriods = [
-    DropdownMenuItem(
-      child: Text('1 month'),
-      value: 1,
-    ),
-    DropdownMenuItem(
-      child: Text('3 month'),
-      value: 3,
-    ),
-    DropdownMenuItem(
-      child: Text('6 month'),
-      value: 6,
-    ),
-    DropdownMenuItem(
-      child: Text('1 year'),
-      value: 12,
-    )
-  ];
-
   @override
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
+
+    List<DropdownMenuItem<int>> timePeriods = [
+      DropdownMenuItem(
+        child: Text(AppLocalizations.of(context)!.oneMonth),
+        value: 1,
+      ),
+      DropdownMenuItem(
+        child: Text(AppLocalizations.of(context)!.threeMonths),
+        value: 3,
+      ),
+      DropdownMenuItem(
+        child: Text(AppLocalizations.of(context)!.sixMonths),
+        value: 6,
+      ),
+      DropdownMenuItem(
+        child: Text(AppLocalizations.of(context)!.oneYear),
+        value: 12,
+      )
+    ];
+
     return Container(
       width: windowWidth * 0.8,
       height: windowHeight * 0.2,
@@ -40,7 +42,7 @@ class _LoanPeriodState extends State<LoanPeriod> {
           Container(
             width: windowWidth * 0.35,
             child: Text(
-              'The period of time for the loan',
+              AppLocalizations.of(context)!.loanPeriod,
               textAlign: TextAlign.left,
             ),
           ),

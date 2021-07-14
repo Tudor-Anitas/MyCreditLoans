@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/main_page/main_page.dart';
 import 'package:my_credit_loans/widgets/simple_button.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResultsPage extends StatelessWidget {
   late final int score;
@@ -27,14 +28,15 @@ class ResultsPage extends StatelessWidget {
         child: Center(
             child: Column(
           children: [
-            Text('Your application was', style: headerStyle),
+            Text(AppLocalizations.of(context)!.applicationHeader,
+                style: headerStyle),
             isSuccessful
                 ? Text(
-                    'successful!',
+                    AppLocalizations.of(context)!.applicationResultValid,
                     style: headerStyle,
                   )
                 : Text(
-                    'unsuccessful!',
+                    AppLocalizations.of(context)!.applicationResultInvalid,
                     style: headerStyle,
                   ),
             isSuccessful
@@ -49,7 +51,7 @@ class ResultsPage extends StatelessWidget {
                     color: Theme.of(context).colorScheme.background,
                   ),
             Text(
-              'Your credit score is',
+              AppLocalizations.of(context)!.creditScoreHeader,
               style: headerStyle,
             ),
             Text(
@@ -60,7 +62,7 @@ class ResultsPage extends StatelessWidget {
               height: windowHeight * 0.2,
             ),
             SimpleButton(
-              text: 'Finish',
+              text: AppLocalizations.of(context)!.finishBtn,
               onPressed: () {
                 Navigator.pushReplacement(
                     context,

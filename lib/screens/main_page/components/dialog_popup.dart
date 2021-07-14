@@ -4,22 +4,25 @@ import 'package:my_credit_loans/screens/main_page/main_page.dart';
 import 'package:my_credit_loans/widgets/cancel_button.dart';
 import 'package:my_credit_loans/widgets/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Shows dialog with loan info
 showCostDialog(BuildContext context, double width, double height) {
   double finalLoan =
       (MainPage.loanValue + MainPage.loanValue / 100) / MainPage.timePeriod;
 
-  String periodPlural = MainPage.timePeriod == 1? 'month' : 'months';
-
   showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('The applied interest is 1%',
+          title: Text(AppLocalizations.of(context)!.interestHeadline,
               style: Theme.of(context).textTheme.bodyText2),
-          content: Text(
-              'The loan selected is: ${MainPage.loanValue.round()} RON, for ${MainPage.timePeriod} $periodPlural, the payment for every month will be ${finalLoan.round()} RON'),
+          content: Text(AppLocalizations.of(context)!.loanSelected +
+              '${MainPage.loanValue.round()} RON, ' +
+              '${MainPage.timePeriod} ' +
+              AppLocalizations.of(context)!.months +
+              AppLocalizations.of(context)!.paymentEveryMonth +
+              '${finalLoan.round()} RON'),
           backgroundColor: Theme.of(context).colorScheme.background,
           contentPadding: EdgeInsets.fromLTRB(24.0, 20.0, 24.0, height * 0.21),
           actions: [
@@ -31,7 +34,6 @@ showCostDialog(BuildContext context, double width, double height) {
                 }),
             ValidateButton(
                 width: width * 0.3,
-                text: 'Accept',
                 onPressed: () {
                   Navigator.push(
                       context,

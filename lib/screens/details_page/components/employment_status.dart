@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/details_page/components/details_form.dart';
 import 'package:my_credit_loans/screens/details_page/components/switch_button.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class EmploymentStatus extends StatefulWidget {
 
 
@@ -26,7 +26,7 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
             child: SwitchButton(
               width: windowWidth * 0.35,
               height: windowHeight * 0.06,
-              title: 'Employed',
+              title: AppLocalizations.of(context)!.employed,
               isActive: DetailsForm.isEmployed,
             )),
         SizedBox(
@@ -41,7 +41,7 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
             child: SwitchButton(
               width: windowWidth * 0.35,
               height: windowHeight * 0.06,
-              title: 'Unemployed',
+              title: AppLocalizations.of(context)!.unemployed,
               isActive: !DetailsForm.isEmployed,
             ))
       ],

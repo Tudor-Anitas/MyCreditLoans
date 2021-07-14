@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../theme.dart';
 
 class ValidateButton extends StatelessWidget {
   late final width;
   late final height;
   late final onPressed;
-  final String text;
-
   ValidateButton({
     this.width = 0.0,
     this.height = 0.0,
-    this.text = 'Continue',
     required this.onPressed,
   });
 
@@ -29,7 +26,7 @@ class ValidateButton extends StatelessWidget {
           boxShadow: [CustomTheme().boxShadow]),
       child: MaterialButton(
           child: Text(
-            '$text',
+            AppLocalizations.of(context)!.continueBtn,
             style: Theme.of(context).textTheme.button,
           ),
           onPressed: onPressed),

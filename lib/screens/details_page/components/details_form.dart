@@ -8,6 +8,7 @@ import 'package:my_credit_loans/screens/results_page/results_page.dart';
 import 'package:my_credit_loans/widgets/input.dart';
 import 'package:my_credit_loans/widgets/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Creates a form to get information about the user
 class DetailsForm extends StatefulWidget {
@@ -22,11 +23,6 @@ class _DetailsFormState extends State<DetailsForm> {
   TextEditingController job = TextEditingController();
   TextEditingController income = TextEditingController();
 
-  SnackBar _invalidInputSnackBar =
-      SnackBar(content: Text('Please fill all the fields!'));
-  SnackBar _httpErrorSnackBar = SnackBar(
-      content: Text('A problem occurred with your request! Try again later'));
-
   static PickedFile? galleryImage; // the image picked from the gallery
   final GlobalKey<FormState> _formKey =
       GlobalKey<FormState>(); // key for the form
@@ -39,10 +35,15 @@ class _DetailsFormState extends State<DetailsForm> {
 
   /// Validates the form
   validator() async {
+    SnackBar _invalidInputSnackBar = SnackBar(
+        content: Text(AppLocalizations.of(context)!.snackBarInvalidInput));
+    SnackBar _httpErrorSnackBar = SnackBar(
+        content: Text(AppLocalizations.of(context)!.snackBarHttpError));
     int score = await getScore();
 
     if (score == -2) {
       ScaffoldMessenger.of(context).showSnackBar(_httpErrorSnackBar);
+
       return;
     }
     if (_formKey.currentState != null &&
@@ -78,7 +79,7 @@ class _DetailsFormState extends State<DetailsForm> {
               height: windowHeight * 0.6 * 0.05,
             ),
             Container(
-              child: const Text('Please complete the form to continue'),
+              child: Text(AppLocalizations.of(context)!.formHeadline),
             ),
             SizedBox(
               height: windowHeight * 0.6 * 0.05,
@@ -86,7 +87,7 @@ class _DetailsFormState extends State<DetailsForm> {
             Container(
               width: windowWidth * 0.75,
               child: Input(
-                hint: 'First and last name',
+                hint: AppLocalizations.of(context)!.nameHint,
                 controller: name,
                 validator: InputValidators().nameValidator,
               ),
@@ -101,7 +102,7 @@ class _DetailsFormState extends State<DetailsForm> {
             Container(
               width: windowWidth * 0.75,
               child: Input(
-                  hint: 'Job title',
+                  hint: AppLocalizations.of(context)!.jobHint,
                   controller: job,
                   validator: InputValidators().jobValidator),
             ),
@@ -121,7 +122,7 @@ class _DetailsFormState extends State<DetailsForm> {
                         Container(
                           width: windowWidth * 0.35,
                           child: Input(
-                            hint: 'Monthly income',
+                            hint: AppLocalizations.of(context)!.monthlyIncome,
                             inputType: TextInputType.number,
                             hintSize: 14,
                             controller: income,
@@ -132,17 +133,9 @@ class _DetailsFormState extends State<DetailsForm> {
                           width: windowWidth * 0.35,
                           margin:
                               EdgeInsets.only(top: windowHeight * 0.6 * 0.05),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Please add a photo',
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                              Text(
-                                'with your last bill',
-                                style: Theme.of(context).textTheme.caption,
-                              )
-                            ],
+                          child: Text(
+                            AppLocalizations.of(context)!.addPhoto,
+                            style: Theme.of(context).textTheme.caption,
                           ),
                         ),
                       ],

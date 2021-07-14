@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CancelButton extends StatelessWidget {
   late final double width;
@@ -17,7 +18,7 @@ class CancelButton extends StatelessWidget {
       color: Theme.of(context).colorScheme.background,
       child: MaterialButton(
         child: Text(
-          'Cancel',
+          AppLocalizations.of(context)!.cancelBtn,
           style: GoogleFonts.montserrat(
               fontSize: 20,
               color: Theme.of(context).errorColor,
