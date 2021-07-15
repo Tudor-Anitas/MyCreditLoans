@@ -2,9 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_credit_loans/common/headline.dart';
 import 'package:my_credit_loans/common/loan_form.dart';
-import 'package:provider/provider.dart';
-
-import '../form_data_model.dart';
 
 class LoanPage extends StatefulWidget {
   @override
@@ -27,9 +24,7 @@ class _LoanPageState extends State<LoanPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Headline(),
-              ChangeNotifierProvider<FormData>(
-                  create: (BuildContext context) => FormData(),
-                  child: LoanForm())
+              LoanForm()
             ],
           ),
         ),

@@ -3,18 +3,18 @@ import 'package:my_credit_loans/screens/loan_page.dart';
 import 'package:my_credit_loans/common/simple_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../form_data_model.dart';
 
 class ResultsPage extends StatelessWidget {
-  late final int score;
-
-  ResultsPage({required this.score});
-
   @override
   Widget build(BuildContext context) {
     // takes the size of the screen
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
-    bool isSuccessful = score >= 7;
+    int? score = Provider.of<FormData>(context).getUserScore();
+    bool isSuccessful = score! >= 7;
     TextStyle? headerStyle = Theme.of(context).textTheme.headline6;
 
     return Scaffold(

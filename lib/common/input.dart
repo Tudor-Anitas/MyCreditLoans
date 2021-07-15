@@ -5,15 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Input extends StatefulWidget {
   late final TextEditingController controller;
+  late final Function(String?) onChanged;
   final TextInputType inputType;
   final double hintSize;
   late final String hint;
-
   late final validator;
 
   Input({
     required this.controller,
     required this.hint,
+    required this.onChanged,
     this.inputType = TextInputType.text,
     this.hintSize = 16,
     required this.validator,
@@ -28,6 +29,7 @@ class _InputState extends State<Input> {
   Widget build(BuildContext context) {
     return SizedBox(
       child: TextFormField(
+          onChanged: widget.onChanged,
           controller: widget.controller,
           style: GoogleFonts.montserrat(fontSize: widget.hintSize),
           keyboardType: widget.inputType,

@@ -38,13 +38,7 @@ showCostDialog(
                       context,
                       PageTransition(
                         type: PageTransitionType.fade,
-                        child: DetailsPage(
-                          loanValue: ((formData.getLoanValue() +
-                                      formData.getLoanValue() / 100) /
-                                  formData.getLoanPeriod())
-                              .round() as double,
-                          timePeriod: formData.getLoanPeriod(),
-                        ),
+                        child: DetailsPage(),
                       ));
                 })
           ],

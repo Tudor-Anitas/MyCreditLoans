@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_credit_loans/common/form_validators.dart';
-import 'package:my_credit_loans/methods.dart';
 import 'package:my_credit_loans/common/gallery_image_picker.dart';
 import 'package:my_credit_loans/common/employment_status.dart';
 import 'package:my_credit_loans/screens/results_page.dart';
@@ -11,6 +10,8 @@ import 'package:my_credit_loans/common/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:provider/provider.dart';
+import 'package:my_credit_loans/form_data_model.dart';
 
 /// Creates a form to get information about the user
 class DetailsForm extends StatefulWidget {
@@ -21,9 +22,18 @@ class DetailsForm extends StatefulWidget {
 }
 
 class _DetailsFormState extends State<DetailsForm> {
-  TextEditingController name = TextEditingController();
-  TextEditingController job = TextEditingController();
-  TextEditingController income = TextEditingController();
+  late TextEditingController name;
+  late TextEditingController job;
+  late TextEditingController income;
+
+  @override
+  void initState() {
+    final FormData formDate = Provider.of<FormData>(context, listen: false);
+    super.initState();
+    name = TextEditingController(text: formDate.getUserName());
+    job = TextEditingController(text: formDate.getUserJob());
+    income = TextEditingController(text: formDate.getUserIncome());
+  }
 
   static PickedFile? _galleryImage; // the image picked from the gallery
   final GlobalKey<FormState> _formKey =
@@ -43,9 +53,10 @@ class _DetailsFormState extends State<DetailsForm> {
     if (_formKey.currentState != null &&
         _formKey.currentState!.validate() &&
         _galleryImage != null) {
-      int? score = await getScore();
+      await Provider.of<FormData>(context, listen: false).updateUserScore();
 
-      if (score == null) {
+      if (Provider.of<FormData>(context, listen: false).getUserScore() ==
+          null) {
         showToast(AppLocalizations.of(context)!.snackBarHttpError,
             context: context,
             animation: StyledToastAnimation.slideFromBottomFade);
@@ -53,10 +64,7 @@ class _DetailsFormState extends State<DetailsForm> {
         Navigator.push(
             context,
             PageTransition(
-                child: ResultsPage(
-                  score: score,
-                ),
-                type: PageTransitionType.fade));
+                child: ResultsPage(), type: PageTransitionType.fade));
       }
     } else
       showToast(AppLocalizations.of(context)!.snackBarInvalidInput,
@@ -75,90 +83,102 @@ class _DetailsFormState extends State<DetailsForm> {
           color: Theme.of(context).colorScheme.background,
           borderRadius: const BorderRadius.only(
               topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            SizedBox(
-              height: windowHeight * 0.6 * 0.05,
-            ),
-            Container(
-              child: Text(AppLocalizations.of(context)!.formHeadline),
-            ),
-            SizedBox(
-              height: windowHeight * 0.6 * 0.05,
-            ),
-            Container(
-              width: windowWidth * 0.75,
-              child: Input(
-                hint: AppLocalizations.of(context)!.nameHint,
-                controller: name,
-                validator: InputValidators().nameValidator,
+      child: Consumer<FormData>(
+        builder: (context, value, child) => Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              SizedBox(
+                height: windowHeight * 0.6 * 0.05,
               ),
-            ),
-            SizedBox(
-              height: windowHeight * 0.6 * 0.02,
-            ),
-            EmploymentStatus(),
-            SizedBox(
-              height: windowHeight * 0.6 * 0.02,
-            ),
-            Container(
-              width: windowWidth * 0.75,
-              child: Input(
+              Container(
+                child: Text(AppLocalizations.of(context)!.formHeadline),
+              ),
+              SizedBox(
+                height: windowHeight * 0.6 * 0.05,
+              ),
+              Container(
+                width: windowWidth * 0.75,
+                child: Input(
+                  hint: AppLocalizations.of(context)!.nameHint,
+                  controller: name,
+                  onChanged: (userName) => value.updateUserName(userName),
+                  validator: InputValidators().nameValidator,
+                ),
+              ),
+              SizedBox(
+                height: windowHeight * 0.6 * 0.02,
+              ),
+              EmploymentStatus(),
+              SizedBox(
+                height: windowHeight * 0.6 * 0.02,
+              ),
+              Container(
+                width: windowWidth * 0.75,
+                child: Input(
                   hint: AppLocalizations.of(context)!.jobHint,
                   controller: job,
-                  validator: InputValidators().jobValidator),
-            ),
-            SizedBox(
-              height: windowHeight * 0.6 * 0.02,
-            ),
-            Container(
-              width: windowWidth * 0.75,
-              height: windowHeight * 0.6 * 0.25,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          width: windowWidth * 0.35,
-                          child: Input(
-                            hint: AppLocalizations.of(context)!.monthlyIncome,
-                            inputType: TextInputType.number,
-                            hintSize: 14,
-                            controller: income,
-                            validator: InputValidators().incomeValidator,
-                          ),
-                        ),
-                        Container(
-                          width: windowWidth * 0.35,
-                          margin:
-                              EdgeInsets.only(top: windowHeight * 0.6 * 0.05),
-                          child: Text(
-                            AppLocalizations.of(context)!.addPhoto,
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                      onTap: pickImage,
-                      child: GalleryImagePicker(
-                        width: windowWidth * 0.3,
-                        isSelected: _galleryImage != null,
-                      ))
-                ],
+                  onChanged: (userJob) => value.updateUserJob(userJob),
+                  validator: (userJob) {
+                    if (value.getEmploymentStatus() && userJob!.length < 3) {
+                      return '';
+                    }
+                    return null;
+                  },
+                ),
               ),
-            ),
-            SizedBox(height: windowHeight * 0.05),
-            ValidateButton(onPressed: () async {
-              await validateForm();
-            })
-          ],
+              SizedBox(
+                height: windowHeight * 0.6 * 0.02,
+              ),
+              Container(
+                width: windowWidth * 0.75,
+                height: windowHeight * 0.6 * 0.25,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            width: windowWidth * 0.35,
+                            child: Input(
+                              hint: AppLocalizations.of(context)!.monthlyIncome,
+                              inputType: TextInputType.number,
+                              hintSize: 14,
+                              controller: income,
+                              onChanged: (userIncome) =>
+                                  value.updateUserIncome(userIncome),
+                              validator: InputValidators().incomeValidator,
+                            ),
+                          ),
+                          Container(
+                            width: windowWidth * 0.35,
+                            margin:
+                                EdgeInsets.only(top: windowHeight * 0.6 * 0.05),
+                            child: Text(
+                              AppLocalizations.of(context)!.addPhoto,
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                        onTap: pickImage,
+                        child: GalleryImagePicker(
+                          width: windowWidth * 0.3,
+                          isSelected: _galleryImage != null,
+                        ))
+                  ],
+                ),
+              ),
+              SizedBox(height: windowHeight * 0.05),
+              ValidateButton(onPressed: () async {
+                await validateForm();
+              })
+            ],
+          ),
         ),
       ),
     );

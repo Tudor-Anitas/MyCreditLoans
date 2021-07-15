@@ -3,14 +3,6 @@ import 'package:my_credit_loans/common/details_form.dart';
 import 'package:my_credit_loans/common/loan_display.dart';
 
 class DetailsPage extends StatefulWidget {
-  late final double loanValue;
-  late final int timePeriod;
-
-  DetailsPage({
-    required this.loanValue,
-    required this.timePeriod,
-  });
-
   @override
   _DetailsPageState createState() => _DetailsPageState();
 }
@@ -31,8 +23,7 @@ class _DetailsPageState extends State<DetailsPage> {
             SizedBox(
               height: windowHeight * 0.05,
             ),
-            LoanDisplay(
-                loanValue: widget.loanValue, timePeriod: widget.timePeriod),
+            LoanDisplay(),
             SizedBox(
               height: windowHeight * 0.05,
             ),
