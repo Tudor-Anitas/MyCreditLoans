@@ -59,9 +59,9 @@ class _LoanPeriodState extends State<LoanPeriod> {
                             value: value.getLoanPeriod(),
                             items: timePeriods,
                             style: Theme.of(context).textTheme.caption,
-                            onChanged: (value) {
-                              Provider.of<FormData>(context, listen: false)
-                                  .updateLoanPeriod(value as int);
+                            onChanged: (newPeriod) {
+                              if (newPeriod is int)
+                                value.updateLoanPeriod(newPeriod);
                             },
                           ))),
                 ),

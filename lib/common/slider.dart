@@ -25,8 +25,7 @@ class _LoanSliderState extends State<LoanSlider> {
                     divisions: 18,
                     label: '${value.getLoanValue().toString()}',
                     onChanged: (newValue) {
-                      Provider.of<FormData>(context, listen: false).updateLoanValue(newValue);
-                      
+                      value.updateLoanValue(newValue);
                     },
                   )),
           Row(
