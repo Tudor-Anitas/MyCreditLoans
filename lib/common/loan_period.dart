@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_credit_loans/screens/loan_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../form_data_model.dart';
 
 class LoanPeriod extends StatefulWidget {
   @override
@@ -36,36 +38,36 @@ class _LoanPeriodState extends State<LoanPeriod> {
       width: windowWidth * 0.8,
       height: windowHeight * 0.2,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: windowWidth * 0.35,
-            child: Text(
-              AppLocalizations.of(context)!.loanPeriod,
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Container(
-            width: windowWidth * 0.3,
-            child: FittedBox(
-              child: Center(
-                child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                  value: LoanPage.timePeriod,
-                  items: timePeriods,
-                  style: Theme.of(context).textTheme.caption,
-                  onChanged: (value) {
-                    setState(() {
-                      LoanPage.timePeriod = value as int;
-                    });
-                  },
-                )),
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: windowWidth * 0.35,
+              child: Text(
+                AppLocalizations.of(context)!.loanPeriod,
+                textAlign: TextAlign.left,
               ),
             ),
-          )
-        ],
-      ),
+            Container(
+              width: windowWidth * 0.3,
+              child: FittedBox(
+                child: Center(
+                  child: Consumer<FormData>(
+                      builder: (context, value, child) =>
+                          DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                            value: value.getLoanPeriod(),
+                            items: timePeriods,
+                            style: Theme.of(context).textTheme.caption,
+                            onChanged: (value) {
+                              Provider.of<FormData>(context, listen: false)
+                                  .updateLoanPeriod(value as int);
+                            },
+                          ))),
+                ),
+              ),
+            ),
+          ]),
     );
   }
 }

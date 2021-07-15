@@ -33,12 +33,21 @@ dependencies:
   image_picker: ^0.8.1+1
   animated_splash_screen: ^1.1.0
   page_transition: ^2.0.1-nullsafety.0
+  flutter_styled_toast: ^2.0.0
+  provider: ^5.0.0
 
 dev_dependencies:
   intl: ^0.17.0-nullsafety.2
+  flutter_native_splash: ^1.2.0
 
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#42a5f5"
+  image: assets/flutter.png
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

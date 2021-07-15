@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:my_credit_loans/common/details_form.dart';
 
 
 /// Get score from API
@@ -21,24 +20,4 @@ Future<int?> getScore() async {
   }
 
   return score;
-}
-
-class InputValidators {
-  Function nameValidator = (String? value) {
-    if (value!.length < 3 ||
-        !value.contains(' ') ||
-        (value.contains(' ') && value.endsWith(' '))) return '';
-    return null;
-  };
-
-  Function jobValidator = (String? value) {
-    if (DetailsForm.isEmployed && value!.length < 3)
-      return '';
-    return null;
-  };
-
-  Function incomeValidator = (String? value) {
-    if (value!.length < 1) return '';
-    return null;
-  };
 }

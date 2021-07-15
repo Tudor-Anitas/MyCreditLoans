@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_credit_loans/screens/details_page.dart';
-import 'package:my_credit_loans/screens/loan_page.dart';
 import 'package:my_credit_loans/common/cancel_button.dart';
 import 'package:my_credit_loans/common/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-/// Shows dialog with loan info
-showCostDialog(BuildContext context, double width, double height) {
-  double finalLoan =
-      (LoanPage.loanValue + LoanPage.loanValue / 100) / LoanPage.timePeriod;
+import '../form_data_model.dart';
 
+/// Shows dialog with loan info
+showCostDialog(
+    BuildContext context, double width, double height, FormData formData) {
   showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -18,11 +17,11 @@ showCostDialog(BuildContext context, double width, double height) {
           title: Text(AppLocalizations.of(context)!.interestHeadline,
               style: Theme.of(context).textTheme.bodyText2),
           content: Text(AppLocalizations.of(context)!.loanSelected +
-              '${LoanPage.loanValue.round()} RON, ' +
-              '${LoanPage.timePeriod} ' +
+              '${formData.getLoanValue()} RON, ' +
+              '${formData.getLoanPeriod()} ' +
               AppLocalizations.of(context)!.months +
               AppLocalizations.of(context)!.paymentEveryMonth +
-              '${finalLoan.round()} RON'),
+              '${((formData.getLoanValue() + formData.getLoanValue() / 100) / formData.getLoanPeriod()).round()} RON'),
           backgroundColor: Theme.of(context).colorScheme.background,
           contentPadding: EdgeInsets.fromLTRB(24.0, 20.0, 24.0, height * 0.21),
           actions: [
@@ -40,8 +39,11 @@ showCostDialog(BuildContext context, double width, double height) {
                       PageTransition(
                         type: PageTransitionType.fade,
                         child: DetailsPage(
-                          loanValue: finalLoan,
-                          timePeriod: LoanPage.timePeriod,
+                          loanValue: ((formData.getLoanValue() +
+                                      formData.getLoanValue() / 100) /
+                                  formData.getLoanPeriod())
+                              .round() as double,
+                          timePeriod: formData.getLoanPeriod(),
                         ),
                       ));
                 })

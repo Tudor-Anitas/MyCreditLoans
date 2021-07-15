@@ -2,19 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_credit_loans/common/headline.dart';
 import 'package:my_credit_loans/common/loan_form.dart';
+import 'package:provider/provider.dart';
+
+import '../form_data_model.dart';
 
 class LoanPage extends StatefulWidget {
-  static double loanValue = 100;
-
-  static int timePeriod = 1;
-
   @override
   _LoanPageState createState() => _LoanPageState();
 }
 
 class _LoanPageState extends State<LoanPage> {
-  double monthlyPayment = 0;
-
   @override
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.of(context).size.width;
@@ -28,7 +25,12 @@ class _LoanPageState extends State<LoanPage> {
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [Headline(), LoanForm()],
+            children: [
+              Headline(),
+              ChangeNotifierProvider<FormData>(
+                  create: (BuildContext context) => FormData(),
+                  child: LoanForm())
+            ],
           ),
         ),
       ),

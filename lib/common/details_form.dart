@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_credit_loans/common/form_validators.dart';
 import 'package:my_credit_loans/methods.dart';
 import 'package:my_credit_loans/common/gallery_image_picker.dart';
 import 'package:my_credit_loans/common/employment_status.dart';
@@ -9,6 +10,7 @@ import 'package:my_credit_loans/common/input.dart';
 import 'package:my_credit_loans/common/validate_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 /// Creates a form to get information about the user
 class DetailsForm extends StatefulWidget {
@@ -38,18 +40,15 @@ class _DetailsFormState extends State<DetailsForm> {
 
   /// Validates the form
   validateForm() async {
-    SnackBar _invalidFormSnackBar = SnackBar(
-        content: Text(AppLocalizations.of(context)!.snackBarInvalidInput));
-    SnackBar _httpErrorSnackBar = SnackBar(
-        content: Text(AppLocalizations.of(context)!.snackBarHttpError));
-
     if (_formKey.currentState != null &&
         _formKey.currentState!.validate() &&
         _galleryImage != null) {
       int? score = await getScore();
 
       if (score == null) {
-        ScaffoldMessenger.of(context).showSnackBar(_httpErrorSnackBar);
+        showToast(AppLocalizations.of(context)!.snackBarHttpError,
+            context: context,
+            animation: StyledToastAnimation.slideFromBottomFade);
       } else {
         Navigator.push(
             context,
@@ -60,7 +59,9 @@ class _DetailsFormState extends State<DetailsForm> {
                 type: PageTransitionType.fade));
       }
     } else
-      ScaffoldMessenger.of(context).showSnackBar(_invalidFormSnackBar);
+      showToast(AppLocalizations.of(context)!.snackBarInvalidInput,
+          context: context,
+          animation: StyledToastAnimation.slideFromBottomFade);
   }
 
   @override
