@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_credit_loans/blocks/application_events.dart';
-import 'package:my_credit_loans/blocks/application_states.dart';
-import 'package:my_credit_loans/blocks/form_bloc.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_events.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc/form_bloc.dart';
 import 'package:my_credit_loans/common/switch_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,7 +16,7 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
-    return BlocBuilder<FormBloc, ApplicationState>(
+    return BlocBuilder<FormBloc, FormApplicationState>(
       builder: (context, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +31,7 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
                   width: windowWidth * 0.35,
                   height: windowHeight * 0.06,
                   title: AppLocalizations.of(context)!.employed,
-                  isActive: state.formData.isEmployed,
+                  isActive: state.formData.isEmployed ?? false,
                 )),
             SizedBox(
               width: windowWidth * 0.05,
@@ -46,7 +46,7 @@ class _EmploymentStatusState extends State<EmploymentStatus> {
                   width: windowWidth * 0.35,
                   height: windowHeight * 0.06,
                   title: AppLocalizations.of(context)!.unemployed,
-                  isActive: !state.formData.isEmployed,
+                  isActive: !(state.formData.isEmployed ?? false),
                 ))
           ],
         );

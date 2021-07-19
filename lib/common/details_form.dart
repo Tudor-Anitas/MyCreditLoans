@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_credit_loans/blocks/application_states.dart';
-import 'package:my_credit_loans/blocks/form_bloc.dart';
-import 'package:my_credit_loans/blocks/application_events.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc/form_bloc.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_events.dart';
 import 'package:my_credit_loans/common/form_validators.dart';
 import 'package:my_credit_loans/common/gallery_image_picker.dart';
 import 'package:my_credit_loans/common/employment_status.dart';
@@ -43,7 +43,7 @@ class _DetailsFormState extends State<DetailsForm> {
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
-    return BlocBuilder<FormBloc, ApplicationState>(
+    return BlocBuilder<FormBloc, FormApplicationState>(
       builder: (context, state) {
         WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
           if (state.runtimeType == HttpErrorState) {
@@ -115,7 +115,7 @@ class _DetailsFormState extends State<DetailsForm> {
                             .add(ChangeJobEvent(job: userJob))
                       },
                       validator: (userJob) {
-                        if (state.formData.isEmployed && userJob!.length < 3) {
+                        if ((state.formData.isEmployed ?? false) && userJob!.length < 3) {
                           return '';
                         }
                         return null;

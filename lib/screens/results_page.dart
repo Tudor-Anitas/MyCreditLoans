@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_credit_loans/blocks/application_events.dart';
-import 'package:my_credit_loans/blocks/application_states.dart';
-import 'package:my_credit_loans/blocks/form_bloc.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_events.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc/form_bloc.dart';
 import 'package:my_credit_loans/screens/loan_page.dart';
 import 'package:my_credit_loans/common/simple_button.dart';
 import 'package:page_transition/page_transition.dart';
@@ -16,10 +16,10 @@ class ResultsPage extends StatelessWidget {
     double windowHeight = MediaQuery.of(context).size.height;
     TextStyle? headerStyle = Theme.of(context).textTheme.headline6;
 
-    return BlocBuilder<FormBloc, ApplicationState>(
+    return BlocBuilder<FormBloc, FormApplicationState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: state.formData.score! >= 7
+          backgroundColor: (state.formData.score ?? 1) >= 7
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.error,
           body: Container(
@@ -31,7 +31,7 @@ class ResultsPage extends StatelessWidget {
               children: [
                 Text(AppLocalizations.of(context)!.applicationHeader,
                     style: headerStyle),
-                state.formData.score! >= 7
+                (state.formData.score ?? 1) >= 7
                     ? Text(
                         AppLocalizations.of(context)!.applicationResultValid,
                         style: headerStyle,
@@ -40,7 +40,7 @@ class ResultsPage extends StatelessWidget {
                         AppLocalizations.of(context)!.applicationResultInvalid,
                         style: headerStyle,
                       ),
-                state.formData.score! >= 7
+                (state.formData.score ?? 1) >= 7
                     ? Icon(
                         Icons.cake,
                         size: 40,
@@ -56,7 +56,7 @@ class ResultsPage extends StatelessWidget {
                   style: headerStyle,
                 ),
                 Text(
-                  '${state.formData.score}',
+                  '${state.formData.score ?? 1}',
                   style: Theme.of(context).textTheme.headline1,
                 ),
                 SizedBox(

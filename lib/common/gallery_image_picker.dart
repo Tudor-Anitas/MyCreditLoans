@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_credit_loans/blocks/application_states.dart';
-import 'package:my_credit_loans/blocks/form_bloc.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc/form_bloc.dart';
 
 class GalleryImagePicker extends StatelessWidget {
   late final double width;
@@ -12,7 +12,7 @@ class GalleryImagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FormBloc, ApplicationState>(
+    return BlocBuilder<FormBloc, FormApplicationState>(
       builder: (context, state) {
         return Container(
             width: width,

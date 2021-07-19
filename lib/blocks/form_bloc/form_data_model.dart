@@ -1,27 +1,26 @@
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
-
-class FormData extends Equatable {
-  final double loanValue;
-  final int loanPeriod;
+class FormDataModel extends Equatable {
+  final double? loanValue;
+  final int? loanPeriod;
   final String? userName;
   final String? userJob;
   final String? userIncome;
-  final bool isEmployed;
+  final bool? isEmployed;
   final PickedFile? image;
   final int? score;
 
-  FormData(
-      {this.loanValue = 100,
-      this.loanPeriod = 1,
-      this.userName = '',
-      this.userJob = '',
-      this.userIncome = '',
-      this.isEmployed = false,
+  FormDataModel(
+      {this.loanValue,
+      this.loanPeriod,
+      this.userName,
+      this.userJob,
+      this.userIncome,
+      this.isEmployed,
       this.image,
-      this.score = 1});
+      this.score});
 
-  FormData copyWith({
+  FormDataModel copyWith({
     double? loanValue,
     int? loanPeriod,
     String? userName,
@@ -31,7 +30,7 @@ class FormData extends Equatable {
     PickedFile? image,
     int? score,
   }) {
-    return FormData(
+    return FormDataModel(
       loanValue: loanValue ?? this.loanValue,
       loanPeriod: loanPeriod ?? this.loanPeriod,
       userName: userName ?? this.userName,

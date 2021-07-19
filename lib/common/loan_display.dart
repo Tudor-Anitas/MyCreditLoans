@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:my_credit_loans/blocks/application_states.dart';
-import 'package:my_credit_loans/blocks/form_bloc.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc/form_bloc.dart';
 
 class LoanDisplay extends StatelessWidget {
   @override
@@ -20,7 +20,7 @@ class LoanDisplay extends StatelessWidget {
         color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
-      child: BlocBuilder<FormBloc, ApplicationState>(
+      child: BlocBuilder<FormBloc, FormApplicationState>(
         builder: (context, state) {
           return Column(
             children: [
@@ -31,7 +31,7 @@ class LoanDisplay extends StatelessWidget {
               Container(
                   width: windowWidth,
                   child: Text(
-                      '${((state.formData.loanValue + state.formData.loanValue / 100) / state.formData.loanPeriod).round()} RON')),
+                      '${(((state.formData.loanValue ?? 100) + (state.formData.loanValue ?? 100) / 100) / (state.formData.loanPeriod ?? 1)).round()} RON')),
               SizedBox(
                 height: windowHeight * 0.03,
               ),
@@ -43,7 +43,7 @@ class LoanDisplay extends StatelessWidget {
                   )),
               Container(
                   width: windowWidth,
-                  child: Text('${state.formData.loanPeriod} ' +
+                  child: Text('${state.formData.loanPeriod ?? 1} ' +
                       AppLocalizations.of(context)!.months))
             ],
           );

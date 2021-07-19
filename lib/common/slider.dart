@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_credit_loans/blocks/application_events.dart';
-import 'package:my_credit_loans/blocks/application_states.dart';
-import 'package:my_credit_loans/blocks/form_bloc.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_events.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc/form_bloc.dart';
 
 class LoanSlider extends StatefulWidget {
   @override
@@ -17,10 +17,10 @@ class _LoanSliderState extends State<LoanSlider> {
       width: windowWidth * 0.75,
       child: Column(
         children: [
-          BlocBuilder<FormBloc, ApplicationState>(
+          BlocBuilder<FormBloc, FormApplicationState>(
             builder: (context, state) {
               return Slider(
-                value: state.formData.loanValue,
+                value: state.formData.loanValue ?? 100,
                 min: 100,
                 max: 1000,
                 divisions: 18,

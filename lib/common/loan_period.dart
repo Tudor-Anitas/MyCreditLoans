@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:my_credit_loans/blocks/application_events.dart';
-import 'package:my_credit_loans/blocks/application_states.dart';
-import 'package:my_credit_loans/blocks/form_bloc.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_events.dart';
+import 'package:my_credit_loans/blocks/form_bloc/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc/form_bloc.dart';
 
 class LoanPeriod extends StatefulWidget {
   @override
@@ -53,11 +53,11 @@ class _LoanPeriodState extends State<LoanPeriod> {
               width: windowWidth * 0.3,
               child: FittedBox(
                 child: Center(
-                  child: BlocBuilder<FormBloc, ApplicationState>(
+                  child: BlocBuilder<FormBloc, FormApplicationState>(
                     builder: (context, state) {
                       return DropdownButtonHideUnderline(
                           child: DropdownButton(
-                        value: state.formData.loanPeriod,
+                        value: state.formData.loanPeriod ?? 1,
                         items: timePeriods,
                         style: Theme.of(context).textTheme.caption,
                         onChanged: (newPeriod) {
