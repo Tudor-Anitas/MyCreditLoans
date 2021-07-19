@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_credit_loans/blocks/form_bloc.dart';
 import 'package:my_credit_loans/common/dialog_popup.dart';
 import 'package:my_credit_loans/common/loan_period.dart';
 import 'package:my_credit_loans/common/slider.dart';
-import 'package:my_credit_loans/common/validate_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-
-import '../form_data_model.dart';
+import 'package:my_credit_loans/common/validate_button.dart';
 
 class LoanForm extends StatefulWidget {
   @override
@@ -20,7 +19,6 @@ class _LoanFormState extends State<LoanForm> {
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
-    final provider = Provider.of<FormData>(context);
 
     return Container(
       width: windowWidth,
@@ -54,7 +52,8 @@ class _LoanFormState extends State<LoanForm> {
           ),
           ValidateButton(
             onPressed: () {
-              showCostDialog(context, windowWidth, windowHeight, provider);
+              showCostDialog(context, windowWidth, windowHeight,
+                  BlocProvider.of<FormBloc>(context).state.formData);
             },
           )
         ],

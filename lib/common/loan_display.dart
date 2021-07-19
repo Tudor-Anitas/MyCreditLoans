@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-
-import '../form_data_model.dart';
+import 'package:my_credit_loans/blocks/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc.dart';
 
 class LoanDisplay extends StatelessWidget {
   @override
@@ -20,32 +20,34 @@ class LoanDisplay extends StatelessWidget {
         color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
-      child: Consumer<FormData>(
-        builder: (context, value, child) => Column(
-          children: [
-            Container(
-                width: windowWidth,
-                child: Text(AppLocalizations.of(context)!.paymentHeadline,
-                    style: Theme.of(context).textTheme.headline6)),
-            Container(
-                width: windowWidth,
-                child: Text(
-                    '${((value.getLoanValue() + value.getLoanValue() / 100) / value.getLoanPeriod()).round()} RON')),
-            SizedBox(
-              height: windowHeight * 0.03,
-            ),
-            Container(
-                width: windowWidth,
-                child: Text(
-                  AppLocalizations.of(context)!.periodOfTime,
-                  style: Theme.of(context).textTheme.headline6,
-                )),
-            Container(
-                width: windowWidth,
-                child: Text('${value.getLoanPeriod()} ' +
-                    AppLocalizations.of(context)!.months))
-          ],
-        ),
+      child: BlocBuilder<FormBloc, ApplicationState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              Container(
+                  width: windowWidth,
+                  child: Text(AppLocalizations.of(context)!.paymentHeadline,
+                      style: Theme.of(context).textTheme.headline6)),
+              Container(
+                  width: windowWidth,
+                  child: Text(
+                      '${((state.formData.loanValue + state.formData.loanValue / 100) / state.formData.loanPeriod).round()} RON')),
+              SizedBox(
+                height: windowHeight * 0.03,
+              ),
+              Container(
+                  width: windowWidth,
+                  child: Text(
+                    AppLocalizations.of(context)!.periodOfTime,
+                    style: Theme.of(context).textTheme.headline6,
+                  )),
+              Container(
+                  width: windowWidth,
+                  child: Text('${state.formData.loanPeriod} ' +
+                      AppLocalizations.of(context)!.months))
+            ],
+          );
+        },
       ),
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-
-import '../form_data_model.dart';
+import 'package:my_credit_loans/blocks/application_events.dart';
+import 'package:my_credit_loans/blocks/application_states.dart';
+import 'package:my_credit_loans/blocks/form_bloc.dart';
 
 class LoanPeriod extends StatefulWidget {
   @override
@@ -52,18 +53,22 @@ class _LoanPeriodState extends State<LoanPeriod> {
               width: windowWidth * 0.3,
               child: FittedBox(
                 child: Center(
-                  child: Consumer<FormData>(
-                      builder: (context, value, child) =>
-                          DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                            value: value.getLoanPeriod(),
-                            items: timePeriods,
-                            style: Theme.of(context).textTheme.caption,
-                            onChanged: (newPeriod) {
-                              if (newPeriod is int)
-                                value.updateLoanPeriod(newPeriod);
-                            },
-                          ))),
+                  child: BlocBuilder<FormBloc, ApplicationState>(
+                    builder: (context, state) {
+                      return DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                        value: state.formData.loanPeriod,
+                        items: timePeriods,
+                        style: Theme.of(context).textTheme.caption,
+                        onChanged: (newPeriod) {
+                          if (newPeriod is int) {
+                            context.read<FormBloc>().add(
+                                ChangeTimePeriodEvent(timePeriod: newPeriod));
+                          }
+                        },
+                      ));
+                    },
+                  ),
                 ),
               ),
             ),
